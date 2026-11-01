@@ -1,7 +1,7 @@
 {
   "scriptVersion": 1,
   "id": "ui-test-phone-v2",
-  "title": "捡手机",
+  "title": "失物檔案",
   "description": "仅用于界面测试，不含剧情",
   "revision": 2,
   "phone": {
