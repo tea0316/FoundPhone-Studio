@@ -751,6 +751,12 @@ svg {
     #b7bfa9
   );
 }
+.wallpaper-custom {
+  background-image: url("/FoundPhone-Studio/wallpaper.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 .wallpaper-orb {
   position: absolute;
   pointer-events: none;
