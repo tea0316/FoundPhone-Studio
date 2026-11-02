@@ -752,8 +752,27 @@ svg {
   );
 }
 .wallpaper-custom {
+  position: relative;
+  background: #000;
+  isolation: isolate;
+}
+
+.wallpaper-custom::before {
+  content: "";
+  position: absolute;
+  inset: -15px;
+  z-index: -1;
+  background: url("/FoundPhone-Studio/wallpaper.jpg") center / cover no-repeat;
+  filter: blur(15px);
+  transform: scale(1.05);
+}
+
+.wallpaper-custom::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   background: url("/FoundPhone-Studio/wallpaper.jpg") center / contain no-repeat;
-  background-color: #000;
 }
 .wallpaper-orb {
   position: absolute;
