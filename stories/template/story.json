@@ -196,6 +196,7 @@
           "body": "这是一条测试消息。",
           "senderId": "test-contact"
         }
+         ]
     },
     {
   "id": "chat-yamashita-line",
