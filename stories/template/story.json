@@ -114,7 +114,7 @@
         {
           "id": "test-message-messages",
           "body": "这是一条测试消息。",
-          "senderId": "test-contact"
+          "senderId": "yamashita-shizuki"
         }
       ]
     },
@@ -130,7 +130,7 @@
         {
           "id": "test-message-wechat",
           "body": "这是一条测试消息。",
-          "senderId": "test-contact"
+          "senderId": "yamashita-shizuki"
         }
       ]
     },
@@ -146,7 +146,7 @@
         {
           "id": "test-message-qq",
           "body": "这是一条测试消息。",
-          "senderId": "test-contact"
+          "senderId": "yamashita-shizuki"
         }
       ]
     },
@@ -162,7 +162,7 @@
         {
           "id": "test-message-whatsapp",
           "body": "这是一条测试消息。",
-          "senderId": "test-contact"
+          "senderId": "yamashita-shizuki"
         }
       ]
     },
@@ -172,13 +172,13 @@
       "title": "测试会话",
       "participants": [
         "owner",
-        "test-contact"
+        "yamashita-shizuki"
       ],
       "messages": [
         {
           "id": "test-message-telegram",
           "body": "这是一条测试消息。",
-          "senderId": "test-contact"
+          "senderId": "yamashita-shizuki"
         }
       ]
     },
@@ -194,7 +194,7 @@
         {
           "id": "test-message-discord",
           "body": "这是一条测试消息。",
-          "senderId": "test-contact"
+          "senderId": "yamashita-shizuki"
         }
          ]
     },
@@ -236,7 +236,7 @@
         {
           "id": "test-message-messenger",
           "body": "这是一条测试消息。",
-          "senderId": "test-contact"
+          "senderId": "yamashita-shizuki"
         }
       ]
     },
@@ -252,7 +252,7 @@
         {
           "id": "test-message-kakao",
           "body": "这是一条测试消息。",
-          "senderId": "test-contact"
+          "senderId": "yamashita-shizuki"
         },
         {
           "id": "test-reply-kakao",
