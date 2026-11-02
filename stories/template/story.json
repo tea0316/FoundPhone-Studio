@@ -732,5 +732,14 @@
       ]
     }
   ],
-  "tests": []
+  "tests": [
+    {
+      "id": "default-path",
+      "label": "預設通關測試",
+      "steps": [
+        "story-start",
+        "yamashita-first-notification"
+      ]
+    }
+  ]
 }
