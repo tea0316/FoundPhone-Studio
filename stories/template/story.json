@@ -5,7 +5,7 @@
   "description": "仅用于界面测试，不含剧情",
   "revision": 2,
   "phone": {
-    "owner": "机主",
+    "owner": "村井優",
     "date": "2026-10-25",
     "time": "09:41",
     "battery": 94,
@@ -88,12 +88,18 @@
     "kakao"
   ],
   "contacts": [
-    {
-      "id": "test-contact",
-      "name": "测试联系人",
-      "phone": "",
-      "bio": "这是一条测试内容。"
-    }
+  {
+    "id": "owner",
+    "name": "村井優",
+    "phone": "",
+    "bio": "手機主人"
+  },
+  {
+    "id": "yamashita-shizuki",
+    "name": "山下瞳月",
+    "phone": "",
+    "bio": "櫻坂46 三期生"
+  }
   ],
   "chats": [
     {
@@ -190,24 +196,33 @@
           "body": "这是一条测试消息。",
           "senderId": "test-contact"
         }
-      ]
     },
     {
-      "id": "test-chat-line",
-      "app": "line",
-      "title": "测试会话",
-      "participants": [
-        "owner",
-        "test-contact"
-      ],
-      "messages": [
-        {
-          "id": "test-message-line",
-          "body": "这是一条测试消息。",
-          "senderId": "test-contact"
-        }
-      ]
+  "id": "chat-yamashita-line",
+  "app": "line",
+  "title": "山下瞳月",
+  "participants": [
+    "owner",
+    "yamashita-shizuki"
+  ],
+  "messages": [
+    {
+      "id": "yamashita-line-001",
+      "body": "おはよう！今日も頑張ろうね ☺️",
+      "senderId": "yamashita-shizuki"
     },
+    {
+      "id": "yamashita-line-002",
+      "body": "そういえば、昨日の写真見た？",
+      "senderId": "yamashita-shizuki"
+    },
+    {
+      "id": "yamashita-line-003",
+      "body": "あとで時間があったら話そう！",
+      "senderId": "yamashita-shizuki"
+    }
+  ]
+},
     {
       "id": "test-chat-messenger",
       "app": "messenger",
