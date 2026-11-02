@@ -735,10 +735,15 @@
   "tests": [
     {
       "id": "default-path",
-      "label": "預設通關測試",
+      "name": "預設通關測試",
+      "ending": "yamashita-first-notification",
       "steps": [
-        "story-start",
-        "yamashita-first-notification"
+        {
+          "eventId": "story-start"
+        },
+        {
+          "eventId": "yamashita-first-notification"
+        }
       ]
     }
   ]
