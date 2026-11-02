@@ -711,40 +711,47 @@
   },
   "variables": {},
   "events": [
-    {
-      "id": "story-start",
-      "label": "故事開始",
-      "type": "start",
-      "next": [
-        "yamashita-first-notification"
-      ]
-    },
-    {
-      "id": "yamashita-first-notification",
-      "label": "山下瞳月傳來 LINE 訊息",
-      "type": "action",
-      "actions": [
-        {
-          "type": "notification",
-          "key": "line",
-          "value": "山下瞳月：おはよう！今日も頑張ろうね ☺️"
-        }
-      ]
-    }
-  ],
-  "tests": [
-    {
-      "id": "default-path",
-      "name": "預設通關測試",
-      "ending": "yamashita-first-notification",
-      "steps": [
-        {
-          "eventId": "story-start"
-        },
-        {
-          "eventId": "yamashita-first-notification"
-        }
-      ]
-    }
-  ]
-}
+  {
+    "id": "story-start",
+    "label": "故事開始",
+    "type": "start",
+    "next": [
+      "yamashita-first-notification"
+    ]
+  },
+  {
+    "id": "yamashita-first-notification",
+    "label": "山下瞳月傳來 LINE 訊息",
+    "type": "action",
+    "actions": [
+      {
+        "type": "notification",
+        "key": "line",
+        "value": "山下瞳月：おはよう！今日も頑張ろうね ☺️"
+      }
+    ],
+    "next": [
+      "yamashita-ending"
+    ]
+  },
+  {
+    "id": "yamashita-ending",
+    "label": "收到山下瞳月的訊息",
+    "type": "ending",
+    "actions": [
+      {
+        "type": "ending",
+        "key": "",
+        "value": "yamashita-first-notification"
+      }
+    ]
+  }
+],
+"tests": [
+  {
+    "id": "default-path",
+    "name": "預設通關測試",
+    "ending": "yamashita-first-notification",
+    "steps": []
+  }
+]
