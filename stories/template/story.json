@@ -6,7 +6,7 @@
   "revision": 2,
   "phone": {
     "owner": "村井優",
-    "date": "2025-10-23",
+    "date": "2026-10-25",
     "time": "09:41",
     "battery": 94,
     "network": "5G",
@@ -87,22 +87,14 @@
     "threads",
     "kakao"
   ],
-"contacts": [
-  {
-    "id": "test-contact",
-    "name": "测试联系人",
-    "phone": "",
-    "avatar": "",
-    "bio": "这是一条测试内容。"
-  },
-  {
-    "id": "shizuki",
-    "name": "しーちゃん",
-    "phone": "",
-    "avatar": "",
-    "bio": "山下瞳月。優的三期生同期，優在LINE裡稱呼她為しーちゃん。"
-  }
-],
+  "contacts": [
+    {
+      "id": "test-contact",
+      "name": "测试联系人",
+      "phone": "",
+      "bio": "这是一条测试内容。"
+    }
+  ],
   "chats": [
     {
       "id": "test-chat-messages",
@@ -200,60 +192,22 @@
         }
       ]
     },
-
-{
-  "id": "yu-shizuki-line",
-  "app": "line",
-  "title": "しーちゃん",
-  "participants": [
-    "owner",
-    "shizuki"
-  ],
-  "messages": [
     {
-      "id": "yu-shizuki-20251025-01",
-      "title": "聊天訊息",
-      "body": "今天也辛苦了！",
-      "senderId": "owner",
-      "time": "21:16"
+      "id": "test-chat-line",
+      "app": "line",
+      "title": "测试会话",
+      "participants": [
+        "owner",
+        "test-contact"
+      ],
+      "messages": [
+        {
+          "id": "test-message-line",
+          "body": "这是一条测试消息。",
+          "senderId": "test-contact"
+        }
+      ]
     },
-    {
-      "id": "yu-shizuki-20251025-02",
-      "title": "聊天訊息",
-      "body": "優ちゃんもお疲れさま",
-      "senderId": "shizuki",
-      "time": "21:18"
-    },
-    {
-      "id": "yu-shizuki-20251025-03",
-      "title": "聊天訊息",
-      "body": "最近ちゃんと寝れてる？",
-      "senderId": "shizuki",
-      "time": "21:19"
-    },
-    {
-      "id": "yu-shizuki-20251025-04",
-      "title": "聊天訊息",
-      "body": "有睡啦（笑）\nしーちゃん也不要太晚睡喔",
-      "senderId": "owner",
-      "time": "21:24"
-    },
-    {
-      "id": "yu-shizuki-20251025-05",
-      "title": "聊天訊息",
-      "body": "うん\n無理しないでね",
-      "senderId": "shizuki",
-      "time": "21:25"
-    },
-    {
-      "id": "yu-shizuki-20251025-06",
-      "title": "聊天訊息",
-      "body": "嗯！謝謝妳☺️",
-      "senderId": "owner",
-      "time": "21:27"
-    }
-  ]
-},
     {
       "id": "test-chat-messenger",
       "app": "messenger",
