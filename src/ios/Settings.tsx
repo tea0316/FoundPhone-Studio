@@ -103,7 +103,6 @@ export function NativeSettings({
           </div>
         );
       case "Wi-Fi":
-      case "Wi-Fi":
         return (
           <>
             <div className="settings-group">
@@ -126,11 +125,11 @@ export function NativeSettings({
             )}
           </>
         );
-      case "蓝牙":
+      case "藍牙":
         return (
           <>
             <div className="settings-group">
-              {toggle("蓝牙", bluetooth, setBluetooth)}
+              {toggle("藍牙", bluetooth, setBluetooth)}
             </div>
             <p className="settings-page-caption">
               {bluetooth ? "我的設備" : "藍牙已關閉"}
@@ -253,12 +252,12 @@ export function NativeSettings({
                               ? wifi
                                 ? "未連接"
                                 : "關閉"
-                              : name === "蓝牙"
+                              : name === "藍牙"
                                 ? bluetooth
-                                  ? "打開"
+                                  ? "開啟"
                                   : "關閉"
                                 : name === "VPN"
-                                  ? "未连接"
+                                  ? "未連線"
                                   : name === "行動網路" || name === "個人熱點"
                                     ? "關閉"
                                     : ""}
