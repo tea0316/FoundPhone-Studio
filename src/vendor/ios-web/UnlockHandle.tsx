@@ -24,7 +24,7 @@ export function UnlockHandle({ onUnlock }: { onUnlock: () => void }) {
       onClick={onUnlock}
       style={{ opacity: 1 - swipeProgress * 0.5 }}
     >
-      向上轻扫以打开
+      向上滑動以打開
     </motion.button>
   );
 }
