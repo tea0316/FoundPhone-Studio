@@ -110,6 +110,7 @@ export function NativeSettings({
             </div>
             {wifi && (
               <>
+                <div style={{ height: "24px" }} /> {/* 增加一點上下間距避免黏在一起 */}
                 <p className="settings-section-label">我的網路</p>
                 <div className="settings-group">
                   <div className="settings-native-row">
