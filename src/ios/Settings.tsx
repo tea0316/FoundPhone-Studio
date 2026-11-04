@@ -103,29 +103,23 @@ export function NativeSettings({
           </div>
         );
       case "Wi-Fi":
-        return (
-          <>
-            <div className="settings-group">
-              {toggle("Wi-Fi", wifi, setWifi)}
-            </div>
-            {wifi && (
-              <>
-                <p className="settings-section-label">我的網路
-                </p>
-                <div className="settings-group">
-                  <div className="settings-native-row">
-                    <Check size={18} color="#007aff" />
-                    <span>{work.phone.network}</span>
-                    <Wifi size={18} />
-                  </div>
-                </div>
-                <p className="settings-page-caption">
-                  連線狀態僅用於作品中的虛擬手機。
-                </p>
-              </>
-            )}
-          </>
-        );
+        return (
+          <>
+            <div className="settings-group">
+              {toggle("Wi-Fi", wifi, setWifi)}
+            </div>
+            {wifi && (
+              <>
+                <p className="settings-section-label">我的網路</p>
+                <div className="settings-group">
+                  <div className="settings-native-row">
+                    <Check size={18} color="#007aff" />
+                    <span>{work.phone.network}</span>
+                    <Wifi size={18} />
+                  </div>
+                </div>
+                <p className="settings-page-caption">
+                  連線狀態僅用於作品中的虛擬手機。
       case "藍牙":
         return (
           <>
