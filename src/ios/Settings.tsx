@@ -110,7 +110,8 @@ export function NativeSettings({
             </div>
             {wifi && (
               <>
-                <div className="settings-section-title">我的網路</div>
+                <p className="settings-section-label">我的網路
+                </p>
                 <div className="settings-group">
                   <div className="settings-native-row">
                     <Check size={18} color="#007aff" />
