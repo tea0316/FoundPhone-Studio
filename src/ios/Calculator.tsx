@@ -78,7 +78,7 @@ export function NativeCalculator(p: {
         <button aria-label="計算歷史" onClick={() => setPanel("history")}>
           <Clock size={26} />
         </button>
-        <button aria-label="機算機模式" onClick={() => setPanel("mode")}>
+        <button aria-label="計算機模式" onClick={() => setPanel("mode")}>
           <Calculator size={25} />
         </button>
       </header>
