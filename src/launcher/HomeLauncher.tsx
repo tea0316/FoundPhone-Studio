@@ -391,7 +391,7 @@ export function HomeLauncher(p: Props) {
       }
       const other = l.apps.find((x) => x.id === target);
       if (a && other && Date.now() - d.hover > 650) {
-        const folder = "檔案夾";
+        const folder = "資料夾";
         a.folder = folder;
         other.folder = folder;
         other.dock = false;
