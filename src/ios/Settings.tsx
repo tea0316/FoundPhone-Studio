@@ -113,7 +113,7 @@ export function NativeSettings({
                 {/* 在這裡加上 style 來調整位置與間距 */}
                 <p 
                   className="settings-section-label" 
-                  style={{ marginTop: "20px", marginBottom: "8px" }}
+                  style={{ marginTop: "0px", marginBottom: "8px" }}
                 >
                   我的網路
                 </p>
