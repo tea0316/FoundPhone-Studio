@@ -523,6 +523,7 @@ export function WeatherSkin(p: Props) {
       </div>
       <nav className="weather-native-toolbar">
         <button aria-label="天氣地圖" onClick={() => setSheet("天氣地圖")}>
+         <Map size={27} />
         </button>
         <div className="weather-city-dots">
           {p.items.length ? (
