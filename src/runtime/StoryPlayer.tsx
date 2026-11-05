@@ -24,7 +24,7 @@ function StoryPlayer() {
       .then((x) => {
         const w = validateWork(x);
         document.title =
-          w.title === "撿手機" ? "撿手機" : w.title + " · IPHONE";
+          w.title === "撿手機" ? "撿手機" : w.title + " · 撿手機";
         setWork(w);
       })
       .catch((e) => {
