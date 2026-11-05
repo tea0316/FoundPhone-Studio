@@ -110,7 +110,13 @@ export function NativeSettings({
             </div>
             {wifi && (
               <>
-                <p className="settings-section-label">我的網路</p>
+                {/* 在這裡加上 style 來調整位置與間距 */}
+                <p 
+                  className="settings-section-label" 
+                  style={{ marginTop: "20px", marginBottom: "8px" }}
+                >
+                  我的網路
+                </p>
                 <div className="settings-group">
                   <div className="settings-native-row">
                     <Check size={18} color="#007aff" />
@@ -118,11 +124,11 @@ export function NativeSettings({
                     <Wifi size={18} />
                   </div>
                 </div>
-                <p className="settings-page-caption">
-                  連線狀態僅用於作品中的虛擬手機。
-                </p>
               </>
             )}
+            <p className="settings-page-caption">
+              連線狀態僅用於作品中的虛擬手機。
+            </p>
           </>
         );
       case "藍牙":
