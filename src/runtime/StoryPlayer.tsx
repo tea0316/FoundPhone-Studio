@@ -18,13 +18,12 @@ function StoryPlayer() {
       { signal: abort.signal },
     )
       .then((r) => {
-        if (!r.ok) throw Error("缺少作品文件，请运行 npm run story:build");
+        if (!r.ok) throw Error("缺少作品檔案，請執行 npm run story:build");
         return r.json();
       })
       .then((x) => {
         const w = validateWork(x);
         document.title =
-          w.title === "捡手机" ? "捡手机" : w.title + " · 捡手机";
         setWork(w);
       })
       .catch((e) => {
@@ -37,7 +36,7 @@ function StoryPlayer() {
       {work ? (
         <Phone work={work} />
       ) : (
-        <p role="status">{error || "正在打开手机…"}</p>
+        <p role="status">{error || "正在打開手機…"}</p>
       )}
     </main>
   );
