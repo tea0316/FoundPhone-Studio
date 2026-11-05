@@ -40,11 +40,11 @@ type Props = {
   clearApp: (id: string) => void;
 };
 const widgetLabels = {
-  calendar: "日历",
-  clock: "时钟",
-  weather: "天气",
-  notes: "备忘录",
-  battery: "电池",
+  calendar: "日曆",
+  clock: "時鐘",
+  weather: "天氣",
+  notes: "備忘錄",
+  battery: "電池",
 };
 const widgetApp = {
   calendar: "calendar",
@@ -75,24 +75,24 @@ function WidgetFace({
             }).format(date)}
           </span>
           <b className="widget-day">{date.getUTCDate()}</b>
-          <small>{work.data.calendar?.[0]?.title || "今天没有日程"}</small>
+          <small>{work.data.calendar?.[0]?.title || "今天沒有行程"}</small>
         </>
       ) : widget.type === "clock" ? (
         <>
           <Clock size={31} />
           <b>{time}</b>
-          <small>时钟</small>
+          <small>時鐘</small>
         </>
       ) : widget.type === "weather" ? (
         <>
           <small>{weather?.title || "未添加城市"}</small>
           <b>{weather?.meta.temperature || "—"}°</b>
           <CloudSun size={27} />
-          <small>{weather?.meta.condition || "暂无天气数据"}</small>
+          <small>{weather?.meta.condition || "暫無天氣資訊"}</small>
         </>
       ) : widget.type === "notes" ? (
         <>
-          <strong>备忘录</strong>
+          <strong>備忘錄'</strong>
           {(work.data.notes || [])
             .filter((i) => !i.hidden && !i.password)
             .slice(0, 3)
@@ -100,14 +100,14 @@ function WidgetFace({
               <small key={i.id}>{i.title}</small>
             ))}
           {!(work.data.notes || []).some((i) => !i.hidden && !i.password) && (
-            <small>无备忘录</small>
+            <small>無備忘錄</small>
           )}
         </>
       ) : (
         <>
           <Battery size={44} />
           <b>{work.phone.battery}%</b>
-          <small>电池</small>
+          <small>電池</small>
         </>
       )}
     </div>
@@ -391,7 +391,7 @@ export function HomeLauncher(p: Props) {
       }
       const other = l.apps.find((x) => x.id === target);
       if (a && other && Date.now() - d.hover > 650) {
-        const folder = "文件夹";
+        const folder = "檔案夾";
         a.folder = folder;
         other.folder = folder;
         other.dock = false;
@@ -435,10 +435,10 @@ export function HomeLauncher(p: Props) {
       data-app-id={entry.app?.id}
       aria-label={
         entry.app
-          ? "打开" + entry.app.name
+          ? "開啟" + entry.app.name
           : entry.folder
-            ? "打开文件夹" + entry.folder
-            : widgetLabels[entry.widget!.type] + "小组件"
+            ? "開啟資料夾" + entry.folder
+            : widgetLabels[entry.widget!.type] + "小工具"
       }
       onPointerDown={(e) => start(e, entry)}
       onPointerMove={move}
@@ -482,7 +482,7 @@ export function HomeLauncher(p: Props) {
   );
   const addWidget = () => {
     if (p.layout.widgets.length >= 24) {
-      setError("最多添加24个小组件");
+      setError("最多添加24個小工具");
       return;
     }
     p.change((l) => {
@@ -541,14 +541,14 @@ export function HomeLauncher(p: Props) {
           clearTimeout(timer.current);
       }}
     >
-      <div className="launcher-toolbar">
+<div className="launcher-toolbar">
         {editing ? (
           <>
-            <button aria-label="添加小组件" onClick={() => setSheet("widgets")}>
+            <button aria-label="加入小工具" onClick={() => setSheet("widgets")}>
               <Plus size={18} />
-              小组件
+              小工具
             </button>
-            <button onClick={() => setSheet("layout")}>布局</button>
+            <button onClick={() => setSheet("layout")}>版面配置</button>
             <button onClick={() => setEditing(false)}>完成</button>
           </>
         ) : null}
@@ -569,7 +569,7 @@ export function HomeLauncher(p: Props) {
             className="home-app-grid"
             data-drop-zone={"page:" + n}
             role="group"
-            aria-label={"桌面第" + (n + 1) + "页"}
+            aria-label={"桌面第" + (n + 1) + "頁"}
             key={n}
           >
             {cells.map(({ entry, x, y, w, h }) => (
@@ -593,7 +593,7 @@ export function HomeLauncher(p: Props) {
             {pages.map((_, i) => (
               <button
                 key={i}
-                aria-label={"前往桌面第" + (i + 1) + "页"}
+                aria-label={"前往桌面第" + (i + 1) + "頁"}
                 aria-current={page === i ? "page" : undefined}
                 onClick={() =>
                   pager.current?.scrollTo({
@@ -607,7 +607,7 @@ export function HomeLauncher(p: Props) {
         )}
         <button className="home-search" onClick={p.search}>
           <Search size={12} />
-          搜索
+          搜尋
         </button>
       </div>
       <div data-drop-zone="dock">
@@ -641,7 +641,7 @@ export function HomeLauncher(p: Props) {
                 setSelected("");
                 setUninstall(false);
               }}
-              aria-label="关闭App管理"
+              aria-label="關閉 App 管理"
             >
               <ChevronLeft />
               桌面
@@ -650,23 +650,23 @@ export function HomeLauncher(p: Props) {
               {sheet === "library"
                 ? "App Store"
                 : sheet === "widgets"
-                  ? "小组件"
+                  ? "小工具"
                   : sheet === "layout"
-                    ? "保存布局"
-                    : active?.name || "小组件"}
+                    ? "儲存版面配置"
+                    : active?.name || "小工具"}
             </strong>
           </header>
           <div className="launcher-sheet-scroll">
             {sheet === "library" ? (
               <>
                 <div className="storefront-title">
-                  <h1>搜索</h1>
+                  <h1>搜尋</h1>
                   <span>App Store</span>
                 </div>
                 <label className="launcher-search">
                   <Search size={18} />
                   <input
-                    placeholder="搜索全部App"
+                    placeholder="搜尋全部 App"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                   />
@@ -674,13 +674,13 @@ export function HomeLauncher(p: Props) {
                 <nav className="library-filters">
                   {[
                     "全部",
-                    "系统",
-                    "通讯",
-                    "社交",
+                    "系統",
+                    "通訊",
+                    "社群",
                     "影音",
                     "生活",
                     "工具",
-                    "已安装",
+                    "已安裝",
                   ].map((label) => (
                     <button
                       key={label}
@@ -692,8 +692,8 @@ export function HomeLauncher(p: Props) {
                   ))}
                 </nav>
                 <p className="library-count">
-                  已安装{apps.filter((a) => a.installed).length} / 全部
-                  {apps.length}个App
+                  已安裝 {apps.filter((a) => a.installed).length} / 全部
+                  {apps.length} 個 App
                 </p>
                 {apps
                   .filter(
@@ -702,7 +702,7 @@ export function HomeLauncher(p: Props) {
                         .toLowerCase()
                         .includes(query.toLowerCase()) &&
                       (filter === "全部" ||
-                        (filter === "已安装" && a.installed) ||
+                        (filter === "已安裝" && a.installed) ||
                         category(a.id) === filter),
                   )
                   .map((a) => (
@@ -721,8 +721,8 @@ export function HomeLauncher(p: Props) {
                           {a.installed
                             ? a.visible
                               ? "已在桌面"
-                              : "仅App库"
-                            : "未安装"}
+                              : "僅 App 資料庫"
+                            : "未安裝"}
                         </small>
                       </button>
                       <button
@@ -746,9 +746,9 @@ export function HomeLauncher(p: Props) {
                       >
                         {a.installed
                           ? a.visible
-                            ? "打开"
-                            : "添加到桌面"
-                          : "获取"}
+                            ? "開啟"
+                            : "加入桌面"
+                          : "取得"}
                       </button>
                     </div>
                   ))}
@@ -785,21 +785,21 @@ export function HomeLauncher(p: Props) {
                   ))}
                 </div>
                 <button className="launcher-primary" onClick={addWidget}>
-                  添加{widgetLabels[widgetType]}小组件
+                  加入{widgetLabels[widgetType]}小工具
                 </button>
               </>
             ) : sheet === "layout" ? (
               <>
-                <p>布局、安装状态和小组件自动保存在本浏览器。</p>
+                <p>版面配置、安裝狀態與小工具會自動儲存于此瀏覽器中。</p>
                 <button className="launcher-action" onClick={download}>
                   <Download />
-                  导出布局JSON
+                  匯出版面配置 JSON
                 </button>
                 <label className="launcher-action">
                   <Upload />
-                  导入布局JSON
+                  匯入版面配置 JSON
                   <input
-                    aria-label="导入桌面布局"
+                    aria-label="匯入桌面版面配置"
                     type="file"
                     accept=".json"
                     onChange={async (e) => {
@@ -807,7 +807,7 @@ export function HomeLauncher(p: Props) {
                       if (!f) return;
                       try {
                         if (f.size > 4 * 1024 * 1024)
-                          throw Error("布局文件过大");
+                          throw Error("版面配置檔案過大");
                         p.importLayout(JSON.parse(await f.text()));
                         setSheet("");
                       } catch (err) {
@@ -816,7 +816,7 @@ export function HomeLauncher(p: Props) {
                     }}
                   />
                 </label>
-                <p>不改写作者故事，不清除玩家剧情存档。</p>
+                <p>不改寫作者故事，不清除玩家劇情存檔。</p>
               </>
             ) : sheet === "widget-actions" ? (
               <>
@@ -853,7 +853,7 @@ export function HomeLauncher(p: Props) {
                     setSheet("");
                   }}
                 >
-                  移除小组件
+                  移除小工具
                 </button>
               </>
             ) : active ? (
@@ -861,9 +861,9 @@ export function HomeLauncher(p: Props) {
                 {!uninstall ? (
                   <>
                     <label className="launcher-field">
-                      App名称
+                      App 名稱
                       <input
-                        aria-label="App名称"
+                        aria-label="App 名稱"
                         maxLength={100}
                         value={active.name}
                         onChange={(e) =>
@@ -874,11 +874,11 @@ export function HomeLauncher(p: Props) {
                       />
                     </label>
                     <label className="launcher-field">
-                      文件夹
+                      資料夾
                       <input
-                        aria-label="文件夹名称"
+                        aria-label="資料夾名稱"
                         maxLength={80}
-                        placeholder="留空移出文件夹"
+                        placeholder="留空以移出資料夾"
                         value={active.folder}
                         onChange={(e) =>
                           patch(active.id, (a) => {
@@ -889,9 +889,9 @@ export function HomeLauncher(p: Props) {
                       />
                     </label>
                     <label className="launcher-field">
-                      自定义图标文字
+                      自訂圖示文字
                       <input
-                        aria-label="自定义图标文字"
+                        aria-label="自訂圖示文字"
                         maxLength={2}
                         value={active.icon.length < 3 ? active.icon : ""}
                         onChange={(e) =>
@@ -902,9 +902,9 @@ export function HomeLauncher(p: Props) {
                       />
                     </label>
                     <label className="launcher-action">
-                      上传图标
+                      上傳圖示
                       <input
-                        aria-label="上传App图标"
+                        aria-label="上傳 App 圖示"
                         type="file"
                         accept="image/png,image/jpeg,image/webp,image/gif"
                         onChange={async (e) => {
@@ -915,7 +915,7 @@ export function HomeLauncher(p: Props) {
                               file.size > 2 * 1024 * 1024 ||
                               !/^image\/(png|jpeg|webp|gif)$/.test(file.type)
                             )
-                              throw Error("请选择2MB以内的图片");
+                              throw Error("請選擇 2MB 以內的圖片");
                             const url = URL.createObjectURL(file);
                             try {
                               const image = new Image();
@@ -961,7 +961,7 @@ export function HomeLauncher(p: Props) {
                           apps.filter((a) => a.installed && a.visible && a.dock)
                             .length >= 4
                         ) {
-                          setError("Dock最多放4个App");
+                          setError("Dock 最多只能放 4 個 App");
                           return;
                         }
                         patch(active.id, (a) => {
@@ -973,7 +973,7 @@ export function HomeLauncher(p: Props) {
                         setSheet("");
                       }}
                     >
-                      {active.dock ? "移出Dock" : "放入Dock"}
+                      {active.dock ? "移出 Dock" : "放入 Dock"}
                     </button>
                     <button
                       className="launcher-action"
@@ -985,7 +985,7 @@ export function HomeLauncher(p: Props) {
                         setSheet("");
                       }}
                     >
-                      从桌面移除
+                      從桌面移除
                     </button>
                     <button
                       className="launcher-action danger"
@@ -995,21 +995,21 @@ export function HomeLauncher(p: Props) {
                         setKeep(true);
                       }}
                     >
-                      卸载App
+                      解除安裝 App
                     </button>
                   </>
                 ) : (
-                  <div role="dialog" aria-label="确认卸载App">
-                    <h2>卸载{active.name}？</h2>
+                  <div role="dialog" aria-label="確認解除安裝 App">
+                    <h2>要解除安裝 {active.name} 嗎？</h2>
                     <label className="launcher-checkbox">
                       <input
                         type="checkbox"
                         checked={keep}
                         onChange={(e) => setKeep(e.target.checked)}
                       />
-                      保留此App的本机内容
+                      保留此 App 的本機資料
                     </label>
-                    <p>取消勾选会移除本机内容，原始故事脚本不受影响。</p>
+                    <p>取消勾選將會移除本機資料，原始故事腳本不受影響。</p>
                     <button
                       className="launcher-primary danger"
                       onClick={() => {
@@ -1026,7 +1026,7 @@ export function HomeLauncher(p: Props) {
                         setSheet("");
                       }}
                     >
-                      确认卸载
+                      確認解除安裝
                     </button>
                     <button
                       className="launcher-action"
