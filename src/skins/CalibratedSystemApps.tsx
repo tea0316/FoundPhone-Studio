@@ -100,11 +100,11 @@ export function HealthSkin(p: Props) {
           {detail
             ? healthTypes.find((x) => x.id === detail)?.title
             : profile
-              ? "健康詳細資料"
+              ? "健康詳細檔案"
               : tab}
         </strong>
         <button
-          aria-label="健康資料"
+          aria-label="健康檔案"
           onClick={() => (p.creator ? p.onAdd() : setProfile(true))}
         >
           <User size={23} />
@@ -113,11 +113,11 @@ export function HealthSkin(p: Props) {
       <div className="health-native-scroll">
         {profile ? (
           <>
-            <h1>健康詳細資料</h1>
+            <h1>健康詳細檔案</h1>
             <section className="health-profile-empty">
               <User size={45} />
               <h2>{p.owner || "機主"}</h2>
-              <p>尚未設定更多資料</p>
+              <p>尚未設定更多檔案</p>
             </section>
           </>
         ) : detail ? (
@@ -162,7 +162,7 @@ export function HealthSkin(p: Props) {
                   <small>{current.time}</small>
                 </>
               ) : (
-                <p>尚無資料</p>
+                <p>暫無資料</p>
               )}
             </section>
           </>
@@ -216,7 +216,7 @@ export function HealthSkin(p: Props) {
                       <div className="health-activity-values">
                         {[
                           ["活動", "active", "大卡"],
-                          ["運動", "exercise", "分鐘"],
+                          ["體能訓練", "exercise", "分鐘"],
                           ["站立", "stand", "小時"],
                         ].map(([name, key, unit], n) => (
                           <div
@@ -276,7 +276,7 @@ export function HealthSkin(p: Props) {
             </button>
             <h2 className="health-trends-title">趨勢</h2>
             <div className="health-trends-empty">
-              {p.items.length ? "查看健康資料中的記錄" : "尚無趨勢"}
+              {p.items.length ? "查看健康資料中的記錄" : "暫無趨勢"}
             </div>
           </>
         ) : tab === "共享" ? (
@@ -580,7 +580,7 @@ export function WeatherSkin(p: Props) {
                     <span>{meta(i, "temperature", "—")}°</span>
                   </button>
                 ))}
-              {!p.items.length && <p>尚無城市</p>}
+              {!p.items.length && <p>暫無城市</p>}
               {p.creator && (
                 <button onClick={p.onAdd}>
                   <Plus />
