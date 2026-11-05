@@ -23,7 +23,6 @@ function StoryPlayer() {
       })
       .then((x) => {
         const w = validateWork(x);
-        document.title =
         setWork(w);
       })
       .catch((e) => {
