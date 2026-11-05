@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { useState, useEffect, useMemo } from "react";
 import { workSchema, type Work } from "../schema";
+
 export const widgetSchema = z.object({
   id: z
     .string()
@@ -9,6 +10,7 @@ export const widgetSchema = z.object({
   type: z.enum(["calendar", "clock", "weather", "notes", "battery"]),
   size: z.enum(["small", "medium", "large"]),
 });
+
 export const layoutSchema = z
   .object({
     version: z.literal(1),
@@ -30,9 +32,11 @@ export const layoutSchema = z
       .default({}),
   })
   .strict();
+
 export type DeviceLayout = z.infer<typeof layoutSchema>;
 export type Widget = z.infer<typeof widgetSchema>;
 export type AppConfig = Work["apps"][number];
+
 export function ensureAppStore(work: Work): Work {
   return work.apps.some((a) => a.id === "appstore")
     ? work
@@ -52,6 +56,7 @@ export function ensureAppStore(work: Work): Work {
         ],
       };
 }
+
 export function defaultLayout(input: Work): DeviceLayout {
   const w = ensureAppStore(input);
   return {
@@ -71,20 +76,21 @@ export function defaultLayout(input: Work): DeviceLayout {
     positions: {},
   };
 }
+
 export function validateLayout(raw: unknown, input: Work) {
   const w = ensureAppStore(input);
   const layout = layoutSchema.parse(raw);
-  if (layout.workId !== w.id) throw Error("布局属于其他作品");
+  if (layout.workId !== w.id) throw Error("版面配置屬於其他作品");
   const known = new Set(w.apps.map((a) => a.id));
-  if (layout.apps.some((a) => !known.has(a.id))) throw Error("布局含未注册App");
+  if (layout.apps.some((a) => !known.has(a.id))) throw Error("版面配置含未註冊 App");
   if (new Set(layout.apps.map((a) => a.id)).size !== layout.apps.length)
-    throw Error("App ID重复");
+    throw Error("App ID 重複");
   if (new Set(layout.widgets.map((a) => a.id)).size !== layout.widgets.length)
-    throw Error("小组件ID重复");
+    throw Error("小工具 ID 重複");
   if (layout.apps.filter((a) => a.installed && a.visible && a.dock).length > 4)
-    throw Error("Dock最多4个App");
+    throw Error("Dock 最多只能放 4 個 App");
   if (layout.widgets.some((w) => known.has(w.id)))
-    throw Error("小组件与App ID冲突");
+    throw Error("小工具與 App ID 衝突");
   layout.apps.push(
     ...w.apps.filter((a) => !layout.apps.some((b) => b.id === a.id)),
   );
@@ -99,7 +105,7 @@ export function validateLayout(raw: unknown, input: Work) {
     for (const app of layout.apps) {
       if (
         visibleApps.includes(app.id) ||
-        ["中国", "国内", "国际", "海外", "国内App", "国际App"].includes(
+        ["中國", "國內", "國際", "海外", "國內 App", "國際 App"].includes(
           app.folder,
         )
       ) {
@@ -127,10 +133,11 @@ export function validateLayout(raw: unknown, input: Work) {
       (c) => c.entry.key === entry.key,
     );
     if (!actual || actual.x !== requested.x || actual.y !== requested.y)
-      throw Error("桌面位置冲突或超出范围");
+      throw Error("桌面位置衝突或超出範圍");
   }
   return layout;
 }
+
 export function useDeviceLayout(authored: Work, creator = false) {
   const base = useMemo(() => ensureAppStore(authored), [authored]);
   const key = "foundphone-layout-v1:" + base.id;
@@ -151,7 +158,7 @@ export function useDeviceLayout(authored: Work, creator = false) {
     try {
       localStorage.setItem(key, JSON.stringify(layout));
     } catch {
-      setError("桌面布局保存失败，请检查本地存储空间");
+      setError("桌面版面配置儲存失敗，請檢查本機儲存空間");
     }
   }, [layout, key, creator]);
   const change = (fn: (draft: DeviceLayout) => void) =>
@@ -188,6 +195,7 @@ export function useDeviceLayout(authored: Work, creator = false) {
     importLayout: (raw: unknown) => setStored(validateLayout(raw, base)),
   };
 }
+
 export type HomeEntry = {
   key: string;
   kind: "app" | "folder" | "widget";
@@ -195,6 +203,7 @@ export type HomeEntry = {
   folder?: string;
   widget?: Widget;
 };
+
 export function homeEntries(layout: DeviceLayout): HomeEntry[] {
   const apps = layout.apps.filter((a) => a.installed && a.visible && !a.dock);
   const folders = [
@@ -221,6 +230,7 @@ export function homeEntries(layout: DeviceLayout): HomeEntry[] {
     return (x < 0 ? 999 : x) - (y < 0 ? 999 : y);
   });
 }
+
 export function packHome(
   entries: HomeEntry[],
   positions: DeviceLayout["positions"] = {},
@@ -288,6 +298,7 @@ export function packHome(
     page.sort((a, b) => entries.indexOf(a.entry) - entries.indexOf(b.entry));
   return pages;
 }
+
 export function moveHome(layout: DeviceLayout, key: string, target: string) {
   const order = homeEntries(layout).map((e) => e.key);
   const from = order.indexOf(key),
