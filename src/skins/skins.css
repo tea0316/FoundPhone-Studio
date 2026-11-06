@@ -2027,15 +2027,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 14px;
+  padding: 0 12px;
   height: 48px;
   background: #ffffff;
   border-bottom: 1px solid #eaeaea;
   flex-shrink: 0;
-  position: relative;
 }
 
-.line-chat-header button {
+/* 左側返回按鈕（含未讀數） */
+.line-chat-header > button {
   background: none;
   border: none;
   font-size: 18px;
@@ -2046,24 +2046,29 @@
   align-items: center;
   gap: 2px;
   font-weight: 500;
-  z-index: 2;
+  min-width: 60px; 
+  text-align: left;
 }
 
 .line-chat-header strong {
-  position: absolute;
+  flex: 1;
+  text-align: center;
   font-size: 16px;
   color: #111;
   font-weight: 600;
-  pointer-events: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
+/* 右側圖示區 */
 .line-chat-header span {
   display: flex;
   align-items: center;
-  gap: 14px;
+  justify-content: flex-end;
+  gap: 12px;
   color: #111;
-  z-index: 2; 
-  margin-left: auto; 
+  min-width: 60px; /* 與左側對稱的最小寬度 */
 }
 
 .line-chat-header span svg {
