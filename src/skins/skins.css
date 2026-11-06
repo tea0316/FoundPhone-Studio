@@ -2032,6 +2032,7 @@
   background: #ffffff;
   border-bottom: 1px solid #eaeaea;
   flex-shrink: 0;
+  position: relative;
 }
 
 .line-chat-header button {
@@ -2045,12 +2046,15 @@
   align-items: center;
   gap: 2px;
   font-weight: 500;
+  z-index: 2;
 }
 
 .line-chat-header strong {
+  position: absolute;
   font-size: 16px;
   color: #111;
   font-weight: 600;
+  pointer-events: none;
 }
 
 .line-chat-header span {
@@ -2058,6 +2062,8 @@
   align-items: center;
   gap: 14px;
   color: #111;
+  z-index: 2; 
+  margin-left: auto; 
 }
 
 .line-chat-header span svg {
