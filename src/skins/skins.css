@@ -1924,6 +1924,7 @@
 
 .line-bubble {
   position: relative;
+  max-width: 68vw;
   text-align: left;
   padding: 8px 12px;
   border-radius: 18px;
@@ -1947,6 +1948,41 @@
   border-radius: 12px;
 }
 
+/* 氣泡小尾巴 */
+.line-bubble.tail::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  width: 10px;
+  height: 10px;
+  background: inherit;
+  clip-path: polygon(0 0, 100% 50%, 100% 100%);
+}
+.line-row.in .line-bubble.tail::before {
+  left: -6px;
+  transform: scaleX(-1);
+}
+.line-row.out .line-bubble.tail::before {
+  right: -6px;
+}
+
+/* 系統訊息小膠囊 (通話紀錄、收回訊息、群組通知) */
+.line-system-msg {
+  display: flex;
+  justify-content: center;
+  margin: 12px 0;
+}
+
+.line-system-msg span {
+  font-size: 13px;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.22);
+  padding: 4px 14px;
+  border-radius: 12px;
+  text-align: center;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
 
 /* ==========================================
    LINE 專屬聊天列表樣式 (LineChatRows)
@@ -2046,7 +2082,7 @@
   align-items: center;
   gap: 6px;
   font-weight: 500;
-  min-width: 60px; 
+  min-width: 60px;
   text-align: left;
 }
 
@@ -2068,25 +2104,7 @@
   justify-content: flex-end;
   gap: 12px;
   color: #111;
-  min-width: 60px; /* 與左側對稱的最小寬度 */
-}
-
-/* 系統訊息小膠囊 (通話紀錄、收回訊息、群組通知) */
-.line-system-msg {
-  display: flex;
-  justify-content: center;
-  margin: 12px 0;
-}
-
-.line-system-msg span {
-  font-size: 13px;
-  color: #ffffff;
-  background: rgba(0, 0, 0, 0.22);
-  padding: 4px 14px;
-  border-radius: 12px;
-  text-align: center;
-  white-space: pre-wrap;
-  word-break: break-all;
+  min-width: 60px;
 }
 
 .line-chat-header span svg {
