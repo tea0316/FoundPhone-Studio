@@ -2079,10 +2079,10 @@
 }
 
 .line-system-msg span {
-  font-size: 11px;
+  font-size: 13px;
   color: #ffffff;
   background: rgba(0, 0, 0, 0.22);
-  padding: 3px 12px;
+  padding: 4px 14px;
   border-radius: 12px;
   text-align: center;
   white-space: pre-wrap;
