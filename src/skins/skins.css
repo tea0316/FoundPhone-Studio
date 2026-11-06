@@ -2071,6 +2071,24 @@
   min-width: 60px; /* 與左側對稱的最小寬度 */
 }
 
+/* 系統訊息小膠囊 (通話紀錄、收回訊息、群組通知) */
+.line-system-msg {
+  display: flex;
+  justify-content: center;
+  margin: 12px 0;
+}
+
+.line-system-msg span {
+  font-size: 11px;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.22);
+  padding: 3px 12px;
+  border-radius: 12px;
+  text-align: center;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
 .line-chat-header span svg {
   cursor: pointer;
 }
