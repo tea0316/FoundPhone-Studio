@@ -22,6 +22,7 @@ export const itemSchema = z.object({
       "note",
       "post",
       "event",
+      "system",
     ])
     .default("text"),
   media: z.string().default(""),
