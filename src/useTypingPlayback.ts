@@ -1,39 +1,30 @@
-
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-
-interface ChatItem {
-  id: string;
-  body?: string;
-  kind?: string;
-  outgoing?: boolean;
-  typingMs?: number;
-  [key: string]: unknown;
-}
+import type { Item } from "./schema"; // 直接引入專案原本的 Item 型別
 
 /** 依內容長度算「輸入中」要持續多久 */
-const typingMs = (i: ChatItem) => {
+const typingMs = (i: Item): number => {
   const custom = Number(i.typingMs || 0);
 
   if (custom > 0) return custom;
   if (i.kind !== "text") return 1200;
 
-  const base = 300 + (i.body?.length || 0) * 80;
+  const base = 300 + (typeof i.body === "string" ? i.body.length : 0) * 80;
   const jittered = base * (0.85 + Math.random() * 0.3);
 
   return Math.min(Math.max(jittered, 700), 5000);
 };
 
-export function useTypingPlayback(items: ChatItem[], thread?: string) {
+export function useTypingPlayback(items: Item[], thread?: string) {
   const [pending, setPending] = useState<Set<string>>(new Set());
-  const [typing, setTyping] = useState(false);
+  const [typing, setTyping] = useState<boolean>(false);
 
-  const seen = useRef(new Set<string>());
-  const queue = useRef<ChatItem[]>([]);
-  const busy = useRef(false);
+  const seen = useRef<Set<string>>(new Set());
+  const queue = useRef<Item[]>([]);
+  const busy = useRef<boolean>(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   /** 清除目前計時器 */
-  const clearTimer = () => {
+  const clearTimer = (): void => {
     if (timer.current !== null) {
       clearTimeout(timer.current);
       timer.current = null;
@@ -41,7 +32,7 @@ export function useTypingPlayback(items: ChatItem[], thread?: string) {
   };
 
   /** 重置播放狀態 */
-  const reset = () => {
+  const reset = (): void => {
     clearTimer();
 
     queue.current = [];
@@ -52,7 +43,7 @@ export function useTypingPlayback(items: ChatItem[], thread?: string) {
   };
 
   /** 播放下一則訊息 */
-  const pump = () => {
+  const pump = (): void => {
     if (busy.current) return;
 
     const next = queue.current.shift();
@@ -94,12 +85,11 @@ export function useTypingPlayback(items: ChatItem[], thread?: string) {
     seen.current = new Set(items.map((i) => i.id));
 
     return () => {
-      // 清理計時器，但不在卸載時更新 state
       clearTimer();
       queue.current = [];
       busy.current = false;
     };
-  }, [thread]);
+  }, [thread, items]);
 
   /** 偵測新訊息並加入播放佇列 */
   useLayoutEffect(() => {
