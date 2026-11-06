@@ -1,8 +1,13 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import type { Item } from "./schema"; // 直接引入專案原本的 Item 型別
+import type { Item } from "./schema";
+
+/** 擴充 Item 型別，允許選填 typingMs */
+interface PlaybackItem extends Item {
+  typingMs?: number;
+}
 
 /** 依內容長度算「輸入中」要持續多久 */
-const typingMs = (i: Item): number => {
+const typingMs = (i: PlaybackItem): number => {
   const custom = Number(i.typingMs || 0);
 
   if (custom > 0) return custom;
@@ -19,7 +24,7 @@ export function useTypingPlayback(items: Item[], thread?: string) {
   const [typing, setTyping] = useState<boolean>(false);
 
   const seen = useRef<Set<string>>(new Set());
-  const queue = useRef<Item[]>([]);
+  const queue = useRef<PlaybackItem[]>([]);
   const busy = useRef<boolean>(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -100,7 +105,7 @@ export function useTypingPlayback(items: Item[], thread?: string) {
     fresh.forEach((i) => seen.current.add(i.id));
 
     // 只播放別人傳來的訊息
-    const incoming = fresh.filter((i) => !i.outgoing);
+    const incoming = fresh.filter((i) => !i.outgoing) as PlaybackItem[];
 
     if (!incoming.length) return;
 
