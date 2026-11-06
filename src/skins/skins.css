@@ -2022,6 +2022,48 @@
   align-items: center;
   justify-content: center;
 }
+
+.line-chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  height: 48px;
+  background: #ffffff;
+  border-bottom: 1px solid #eaeaea;
+  flex-shrink: 0;
+}
+
+.line-chat-header button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #111;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-weight: 500;
+}
+
+.line-chat-header strong {
+  font-size: 16px;
+  color: #111;
+  font-weight: 600;
+}
+
+.line-chat-header span {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: #111;
+}
+
+.line-chat-header span svg {
+  cursor: pointer;
+}
+
 .messenger-ui {
   --app-accent: #6262d8;
 }
