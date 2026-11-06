@@ -1948,24 +1948,6 @@
   border-radius: 12px;
 }
 
-/* 氣泡小尾巴 */
-.line-bubble.tail::before {
-  content: "";
-  position: absolute;
-  top: 8px;
-  width: 10px;
-  height: 10px;
-  background: inherit;
-  clip-path: polygon(0 0, 100% 50%, 100% 100%);
-}
-.line-row.in .line-bubble.tail::before {
-  left: -6px;
-  transform: scaleX(-1);
-}
-.line-row.out .line-bubble.tail::before {
-  right: -6px;
-}
-
 /* 系統訊息小膠囊 (通話紀錄、收回訊息、群組通知) */
 .line-system-msg {
   display: flex;
