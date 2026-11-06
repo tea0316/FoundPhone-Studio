@@ -255,6 +255,16 @@
         "body": "对方已收回消息",
         "kind": "system",
         "time": "2026-06-07 10:00"
+      },
+      {
+        "id": "test_msg_01",
+        "title": "測試會話",
+        "sender": "角色名字",
+        "body": "這是一則測試的新訊息，看看打字效果有沒有出來！",
+        "kind": "text",
+        "time": "2026-06-07 10:05",
+        "outgoing": false,
+        "typingMs": 3000
       }
     ],
     "phone": [
