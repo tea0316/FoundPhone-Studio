@@ -62,6 +62,99 @@ function Bubbles({
   );
 }
 
+const WEEK = ["日", "一", "二", "三", "四", "五", "六"];
+const dayDiff = (a: string, b: string) =>
+  Math.round((+new Date(b.slice(0, 10)) - +new Date(a.slice(0, 10))) / 864e5);
+const weekday = (t: string) => WEEK[new Date(t.slice(0, 10)).getUTCDay()];
+
+/** 故事自己的「今天」:取所有訊息中最新的一天 */
+const storyNow = (items: Item[]) =>
+  items.reduce((m, i) => (i.time > m ? i.time : m), "");
+
+/** 聊天室日期分隔線:今天 / 昨天 / 2026/11/07(週六) */
+function dayLabel(time: string, now: string) {
+  const d = dayDiff(time, now);
+  if (d === 0) return "今天";
+  if (d === 1) return "昨天";
+  return `${time.slice(0, 10).replaceAll("-", "/")}(週${weekday(time)})`;
+}
+
+/** 聊天列表右上角時間:HH:mm / 昨天 / 週X / M/D / YYYY/M/D */
+function listTime(time: string, now: string) {
+  const d = dayDiff(time, now);
+  if (d <= 0) return time.slice(-5);
+  if (d === 1) return "昨天";
+  if (d < 7) return `週${weekday(time)}`;
+  return time.slice(0, 4) === now.slice(0, 4)
+    ? `${+time.slice(5, 7)}/${+time.slice(8, 10)}`
+    : time.slice(0, 10).replaceAll("-", "/");
+}
+
+function LineBubbles({ p, items, now }: { p: Props; items: Item[]; now: string }) {
+  const isGroup =
+    new Set(items.filter((i) => !i.outgoing).map((i) => i.sender)).size > 1;
+  const sameRun = (a?: Item, b?: Item) =>
+    !!a && !!b &&
+    a.outgoing === b.outgoing &&
+    a.sender === b.sender &&
+    a.time.slice(0, 10) === b.time.slice(0, 10);
+
+  return (
+    <div className="line-bubbles">
+      {items.map((i, idx) => {
+        const prev = items[idx - 1];
+        const next = items[idx + 1];
+        const first = !sameRun(prev, i);
+        const lastOfMinute =
+          !(sameRun(i, next) && next!.time.slice(0, 16) === i.time.slice(0, 16));
+        const newDay = !prev || prev.time.slice(0, 10) !== i.time.slice(0, 10);
+        const isMedia = ["image", "video"].includes(i.kind);
+        const lastOfRun = !sameRun(i, next);
+
+        return (
+          <div key={i.id}>
+            {newDay && <time className="line-date">{dayLabel(i.time, now)}</time>}
+            <div className={`line-row ${i.outgoing ? "out" : "in"}`}>
+              {!i.outgoing &&
+                (first ? (
+                  <Avatar name={i.sender} src={i.avatar} round />
+                ) : (
+                  <span className="line-avatar-gap" />
+                ))}
+              <div className="line-col">
+                {!i.outgoing && first && isGroup && (
+                  <small className="line-name">{i.sender}</small>
+                )}
+                <div className="line-msg">
+                  {i.outgoing && lastOfMinute && (
+                    <span className="line-meta">
+                      {i.read && lastOfRun && <em>已讀</em>}
+                      {i.time.slice(-5)}
+                    </span>
+                  )}
+                  <button
+                    className={`line-bubble ${isMedia ? "media" : ""} ${first && !isMedia ? "tail" : ""}`}
+                    onClick={() => (p.creator ? p.onItem(i) : p.onRead(i.id))}
+                  >
+                    {["image", "video", "audio"].includes(i.kind) ? (
+                      <Media item={i} />
+                    ) : (
+                      i.body
+                    )}
+                  </button>
+                  {!i.outgoing && lastOfMinute && (
+                    <span className="line-meta">{i.time.slice(-5)}</span>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 function Composer({ p }: { p: Props }) {
   return (
     <div className="catalog-composer">
@@ -386,6 +479,8 @@ export function DiscordSkin(p: Props) {
 
 export function LineSkin(p: Props) {
   const { tab, setTab, q, setQ, items } = useContent(p, "聊天");
+  const now = storyNow(items); // 取得故事的最新一天
+  
   return (
     <div className="catalog-skin line-ui">
       <Header
@@ -394,10 +489,10 @@ export function LineSkin(p: Props) {
       {p.thread ? (
         <>
           <h3 className="line-peer">{p.thread}</h3>
-          <Bubbles
+         <LineBubbles
             p={p}
             items={items.filter((i) => i.title === p.thread)}
-            className="line-bubbles"
+            now={now}
           />
           <Composer p={p} />
         </>
