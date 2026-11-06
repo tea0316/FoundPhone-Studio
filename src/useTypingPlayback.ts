@@ -27,7 +27,7 @@ export function useTypingPlayback(items: ChatItem[], thread?: string) {
   const busy = useRef(false);
   const timer = useRef<number>();
 
-  const reset = () => {
+  const reset = (_cleanup?: any) => {
     if (timer.current) clearTimeout(timer.current);
     queue.current = [];
     busy.current = false;
