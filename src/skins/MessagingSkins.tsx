@@ -92,71 +92,6 @@ function _listTime(time: string, now: string) {
     : time.slice(0, 10).replaceAll("-", "/");
 }
 
-function LineBubbles({ p, items, now }: { p: Props; items: Item[]; now: string }) {
-  const isGroup =
-    new Set(items.filter((i) => !i.outgoing).map((i) => i.sender)).size > 1;
-  const sameRun = (a?: Item, b?: Item) =>
-    !!a && !!b &&
-    a.outgoing === b.outgoing &&
-    a.sender === b.sender &&
-    a.time.slice(0, 10) === b.time.slice(0, 10);
-
-  return (
-    <div className="line-bubbles">
-      {items.map((i, idx) => {
-        const prev = items[idx - 1];
-        const next = items[idx + 1];
-        const first = !sameRun(prev, i);
-        const lastOfMinute =
-          !(sameRun(i, next) && next!.time.slice(0, 16) === i.time.slice(0, 16));
-        const newDay = !prev || prev.time.slice(0, 10) !== i.time.slice(0, 10);
-        const isMedia = ["image", "video"].includes(i.kind);
-        const lastOfRun = !sameRun(i, next);
-
-        return (
-          <div key={i.id}>
-            {newDay && <time className="line-date">{dayLabel(i.time, now)}</time>}
-            <div className={`line-row ${i.outgoing ? "out" : "in"}`}>
-              {!i.outgoing &&
-                (first ? (
-                  <Avatar name={i.sender} src={i.avatar} round />
-                ) : (
-                  <span className="line-avatar-gap" />
-                ))}
-              <div className="line-col">
-                {!i.outgoing && first && isGroup && (
-                  <small className="line-name">{i.sender}</small>
-                )}
-                <div className="line-msg">
-                  {i.outgoing && lastOfMinute && (
-                    <span className="line-meta">
-                      {i.read && lastOfRun && <em>已讀</em>}
-                      {i.time.slice(-5)}
-                    </span>
-                  )}
-                  <button
-                    className={`line-bubble ${isMedia ? "media" : ""} ${first && !isMedia ? "tail" : ""}`}
-                    onClick={() => (p.creator ? p.onItem(i) : p.onRead(i.id))}
-                  >
-                    {["image", "video", "audio"].includes(i.kind) ? (
-                      <Media item={i} />
-                    ) : (
-                      i.body
-                    )}
-                  </button>
-                  {!i.outgoing && lastOfMinute && (
-                    <span className="line-meta">{i.time.slice(-5)}</span>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
 function Composer({ p }: { p: Props }) {
   return (
     <div className="catalog-composer">
@@ -500,10 +435,8 @@ function LineBubbles({ p, items, now }: { p: Props; items: Item[]; now: string }
         const isMedia = ["image", "video"].includes(i.kind);
         const lastOfRun = !sameRun(i, next);
 
-        // ==========================================
-        // 系統訊息分支：置中灰底小膠囊
-        // ==========================================
-        if (i.kind === "system") {
+        // 系統訊息分支：置中灰底小膠囊 (使用 as string 避免型別衝突)
+        if ((i.kind as string) === "system") {
           return (
             <div key={i.id}>
               {newDay && <time className="line-date">{dayLabel(i.time, now)}</time>}
@@ -557,6 +490,7 @@ function LineBubbles({ p, items, now }: { p: Props; items: Item[]; now: string }
     </div>
   );
 }
+
 function LineChatRows({ p, items, now }: { p: Props; items: Item[]; now: string }) {
   const preview = (i: Item) =>
     ({ image: "傳送了照片", video: "傳送了影片", audio: "傳送了語音訊息" } as Record<string, string>)[i.kind] ?? i.body;
@@ -609,7 +543,6 @@ export function LineSkin(p: Props) {
     <div className="catalog-skin line-ui">
       {p.thread ? (
         <>
-          {/* 3. 聊天室標題列 (左返回含未讀、中名字、右三圖示) */}
           <div className="line-chat-header">
             <button onClick={() => p.onThread("")}>
               ‹ {totalUnread || ""}
