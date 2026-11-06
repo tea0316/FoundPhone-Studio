@@ -11,6 +11,8 @@ import {
   Send,
   Smile,
   Users,
+  Search, 
+  Menu,   
 } from "lucide-react";
 import { useState } from "react";
 import type { Item } from "../schema";
@@ -476,7 +478,6 @@ export function DiscordSkin(p: Props) {
     </div>
   );
 }
-
 function LineChatRows({ p, items, now }: { p: Props; items: Item[]; now: string }) {
   const preview = (i: Item) =>
     ({ image: "傳送了照片", video: "傳送了影片", audio: "傳送了語音訊息" } as Record<string, string>)[i.kind] ?? i.body;
@@ -520,17 +521,29 @@ function LineChatRows({ p, items, now }: { p: Props; items: Item[]; now: string 
 
 export function LineSkin(p: Props) {
   const { tab, setTab, q, setQ, items } = useContent(p, "聊天");
-  const now = storyNow(items); // 取得故事的最新一天
-  
+  const now = storyNow(items);
+
+  // 計算全域總未讀數字，供返回按鈕旁邊顯示
+  const totalUnread = items.filter((i) => !i.outgoing && !i.read).length;
+
   return (
     <div className="catalog-skin line-ui">
-      <Header
-        p={{ ...p, onBack: () => (p.thread ? p.onThread("") : p.onBack()) }}
-      />
       {p.thread ? (
         <>
-          <h3 className="line-peer">{p.thread}</h3>
-         <LineBubbles
+          {/* 3. 聊天室標題列 (左返回含未讀、中名字、右三圖示) */}
+          <div className="line-chat-header">
+            <button onClick={() => p.onThread("")}>
+              ‹ {totalUnread || ""}
+            </button>
+            <strong>{p.thread}</strong>
+            <span>
+              <Search size={20} />
+              <Phone size={20} />
+              <Menu size={20} />
+            </span>
+          </div>
+
+          <LineBubbles
             p={p}
             items={items.filter((i) => i.title === p.thread)}
             now={now}
@@ -539,11 +552,12 @@ export function LineSkin(p: Props) {
         </>
       ) : (
         <>
+          <Header p={p} />
           <div className="catalog-scroll">
             <h1>{tab}</h1>
             <SearchBox value={q} set={setQ} />
             {tab === "聊天" ? (
-            <LineChatRows p={p} items={items} now={now} />
+              <LineChatRows p={p} items={items} now={now} />
             ) : (
               <>
                 <div className="line-owner">
