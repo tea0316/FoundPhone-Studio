@@ -7,7 +7,7 @@ interface ChatItem {
   kind?: string;
   outgoing?: boolean;
   typingMs?: number;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 /** 依內容長度算「輸入中」要持續多久 */
