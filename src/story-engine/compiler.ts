@@ -12,7 +12,12 @@ import { validateGraph } from "../engine";
 const id = z.string().regex(/^[a-zA-Z][a-zA-Z0-9_.-]*$/, "需要稳定的英文 ID");
 const content = itemSchema
   .partial()
-  .extend({ id, title: z.string().default(""), body: z.string().default("") })
+  .extend({
+    id,
+    title: z.string().default(""),
+    body: z.string().default(""),
+    kind: z.union([itemSchema.shape.kind, z.literal("system")]).default("text"),
+  })
   .strict();
 const event = nodeSchema
   .partial()
