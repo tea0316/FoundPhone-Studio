@@ -80,7 +80,7 @@ function dayLabel(time: string, now: string) {
 }
 
 /** 聊天列表右上角時間:HH:mm / 昨天 / 週X / M/D / YYYY/M/D */
-function listTime(time: string, now: string) {
+function _listTime(time: string, now: string) {
   const d = dayDiff(time, now);
   if (d <= 0) return time.slice(-5);
   if (d === 1) return "昨天";
