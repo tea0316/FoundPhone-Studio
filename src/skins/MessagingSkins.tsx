@@ -477,6 +477,47 @@ export function DiscordSkin(p: Props) {
   );
 }
 
+function LineChatRows({ p, items, now }: { p: Props; items: Item[]; now: string }) {
+  const preview = (i: Item) =>
+    ({ image: "傳送了照片", video: "傳送了影片", audio: "傳送了語音訊息" } as Record<string, string>)[i.kind] ?? i.body;
+
+  const rows = [...new Set(items.map((i) => i.title))]
+    .map((name) => {
+      const mine = items.filter((i) => i.title === name);
+      const last = mine.at(-1)!;
+      return {
+        name,
+        last,
+        unread: mine.filter((i) => !i.outgoing && !i.read).length,
+        pinned: meta(last, "pinned", "") === "1",
+      };
+    })
+    .sort((a, b) => +b.pinned - +a.pinned || b.last.time.localeCompare(a.last.time));
+
+  return (
+    <>
+      {rows.map(({ name, last, unread, pinned }) => (
+        <button
+          key={name}
+          className={`line-chat ${pinned ? "pinned" : ""}`}
+          onClick={() => { p.onThread(name); p.onRead(name); }}
+        >
+          <Avatar name={name} src={last.avatar} round />
+          <span className="line-chat-main">
+            <strong>{name}</strong>
+            <p>{preview(last)}</p>
+          </span>
+          <span className="line-chat-side">
+            <time>{_listTime(last.time, now)}</time>
+            {unread > 0 && <b className="line-badge">{unread > 99 ? "99+" : unread}</b>}
+          </span>
+        </button>
+      ))}
+      <Empty items={items} />
+    </>
+  );
+}
+
 export function LineSkin(p: Props) {
   const { tab, setTab, q, setQ, items } = useContent(p, "聊天");
   const now = storyNow(items); // 取得故事的最新一天
@@ -502,7 +543,7 @@ export function LineSkin(p: Props) {
             <h1>{tab}</h1>
             <SearchBox value={q} set={setQ} />
             {tab === "聊天" ? (
-              <ChatRows p={p} items={items} />
+            <LineChatRows p={p} items={items} now={now} />
             ) : (
               <>
                 <div className="line-owner">
