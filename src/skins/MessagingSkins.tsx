@@ -14,8 +14,9 @@ import {
   Search, 
   Menu,   
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import type { Item } from "../schema";
+import { useTypingPlayback } from "../useTypingPlayback";
 import {
   Add,
   Avatar,
@@ -539,6 +540,14 @@ export function LineSkin(p: Props) {
   // 計算全域總未讀數字，供返回按鈕旁邊顯示
   const totalUnread = items.filter((i) => !i.outgoing && !i.read).length;
 
+  // 過濾出當前 thread 的訊息，並套用打字佇列 Hook
+  const threadItems = useMemo(
+    () => items.filter((i) => i.title === p.thread),
+    [items, p.thread],
+  );
+
+  const { visible, typing } = useTypingPlayback(threadItems, p.thread);
+
   return (
     <div className="catalog-skin line-ui">
       {p.thread ? (
@@ -547,7 +556,9 @@ export function LineSkin(p: Props) {
             <button onClick={() => p.onThread("")}>
               ‹ {totalUnread || ""}
             </button>
-            <strong>{p.thread}</strong>
+            <strong>
+              {p.thread} {typing && <span className="line-typing-status" style={{ fontSize: "0.8em", opacity: 0.7, fontWeight: "normal" }}>(對方正在輸入...)</span>}
+            </strong>
             <span>
               <Search size={20} />
               <Phone size={20} />
@@ -557,7 +568,7 @@ export function LineSkin(p: Props) {
 
           <LineBubbles
             p={p}
-            items={items.filter((i) => i.title === p.thread)}
+            items={visible}
             now={now}
           />
           <Composer p={p} />
