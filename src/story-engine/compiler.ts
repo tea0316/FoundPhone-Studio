@@ -16,7 +16,7 @@ const content = itemSchema
     id,
     title: z.string().default(""),
     body: z.string().default(""),
-    kind: z.union([itemSchema.shape.kind, z.literal("system")]).default("text"),
+    kind: z.string().default("text"),
   })
   .strict();
 const event = nodeSchema
