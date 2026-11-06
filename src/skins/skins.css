@@ -1781,38 +1781,53 @@
   border: 0;
 }
 .line-ui h1 {
-  font-size: 25px;
+  font-size: 24px;
+  font-weight: 700;
+  padding: 15px 16px 5px;
 }
 .line-owner {
-  padding: 15px;
+  padding: 12px 16px;
   display: flex;
   align-items: center;
-  gap: 13px;
+  gap: 12px;
+  border-bottom: 1px solid #f2f2f2;
 }
 .line-owner .catalog-avatar {
-  width: 55px;
-  height: 55px;
+  width: 48px;
+  height: 48px;
 }
 .line-owner h2 {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
+  color: #111;
 }
 .line-ui .catalog-scroll > h4 {
-  padding: 15px 17px 6px;
+  padding: 15px 16px 6px;
   font-size: 12px;
-  color: #999;
+  color: #888;
+  font-weight: 500;
 }
 .line-friends {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  padding: 15px 10px;
-  gap: 20px;
+  padding: 10px 16px;
+  gap: 16px;
 }
 .line-friends > button {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  font-size: 10px;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #333;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}
+.line-friends > button .catalog-avatar {
+  width: 50px;
+  height: 50px;
 }
 .line-peer {
   font-size: 13px;
