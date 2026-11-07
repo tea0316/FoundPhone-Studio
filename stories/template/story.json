@@ -92,6 +92,7 @@
       "id": "test-contact",
       "name": "测试联系人",
       "phone": "",
+      "avatar": "/sea.jpg",
       "bio": "这是一条测试内容。"
     }
   ],
