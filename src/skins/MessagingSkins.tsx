@@ -419,10 +419,12 @@ function LineBubbles({ p, items, now }: { p: Props; items: Item[]; now: string }
     new Set(items.filter((i) => !i.outgoing).map((i) => i.sender)).size > 1;
   const sameRun = (a?: Item, b?: Item) =>
     !!a && !!b &&
+    (a.kind as string) !== "system" &&
+    (b.kind as string) !== "system" &&
     a.outgoing === b.outgoing &&
     a.sender === b.sender &&
     a.time.slice(0, 10) === b.time.slice(0, 10);
-
+  
   return (
     <div className="line-bubbles">
       {items.map((i, idx) => {
