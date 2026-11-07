@@ -90,7 +90,7 @@
   "contacts": [
     {
       "id": "test-contact",
-      "name": "测试联系人",
+      "name": "对方",
       "phone": "",
       "avatar": "/sea.jpg",
       "bio": "这是一条测试内容。"
