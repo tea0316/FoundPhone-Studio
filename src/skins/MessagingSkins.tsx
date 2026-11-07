@@ -14,7 +14,7 @@ import {
   Search,
   Menu,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { Item } from "../schema";
 import {
   Add,
@@ -534,6 +534,13 @@ function LineChatRows({ p, items, now }: { p: Props; items: Item[]; now: string 
 export function LineSkin(p: Props) {
   const { tab, setTab, q, setQ, items } = useContent(p, "聊天");
   const now = storyNow(items);
+  useEffect(() => {
+    if (p.thread) {
+      items
+        .filter((i) => i.title === p.thread && !i.outgoing && !i.read)
+        .forEach((i) => p.onRead(i.id));
+    }
+  }, [p.thread]);
 
   const totalUnread = items.filter((i) => !i.outgoing && !i.read).length;
 
