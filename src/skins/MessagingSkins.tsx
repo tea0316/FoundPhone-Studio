@@ -511,13 +511,11 @@ function LineChatRows({ p, items, now }: { p: Props; items: Item[]; now: string 
     <>
       {rows.map(({ name, last, unread, pinned }) => (
         <button
-         key={name}
+          key={name}
           className={`line-chat ${pinned ? "pinned" : ""}`}
           onClick={() => {
             p.onThread(name);
-            items
-              .filter((i) => i.title === name && !i.outgoing && !i.read)
-              .forEach((i) => p.onRead(i.id));
+            p.onRead(name);
           }}
         >
           <Avatar name={name} src={last.avatar} round />
