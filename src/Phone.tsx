@@ -992,7 +992,9 @@ function AppContent({
               ui={state.ui?.[app.id]}
               onUi={creator ? undefined : onUi}
               name={name}
-              items={shown}
+              items={shown.map((i) =>
+              i.read || state.read.includes(i.id) ? { ...i, read: true } : i,
+              )}
               creator={creator}
               onRead={onRead}
               onItem={read}
