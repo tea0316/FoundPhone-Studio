@@ -588,18 +588,23 @@ export function LineSkin(p: Props) {
                 </div>
                 <h4>好友</h4>
                 <div className="line-friends">
-                  {[...new Set(items.map((i) => i.sender))].map((s) => (
-                    <button
-                      key={s}
-                      onClick={() => {
-                        const i = items.find((item) => item.sender === s);
-                        if (i) p.onThread(i.title);
-                      }}
-                    >
-                      <Avatar name={s} />
-                      {s}
-                    </button>
-                  ))}
+                  {[...new Set(items.map((i) => i.sender))].map((s) => {
+                    const first = items.find((item) => item.sender === s);
+                    const avatar = items.find(
+                      (item) => item.sender === s && item.avatar,
+                    )?.avatar;
+                    return (
+                      <button
+                        key={s}
+                        onClick={() => {
+                          if (first) p.onThread(first.title);
+                        }}
+                      >
+                        <Avatar name={s} src={avatar} />
+                        {s}
+                      </button>
+                    );
+                  })}
                 </div>
               </>
             )}
