@@ -588,19 +588,14 @@ export function LineSkin(p: Props) {
                 </div>
                 <h4>好友</h4>
                 <div className="line-friends">
-  {[...new Set(items.map((i) => i.sender))].map((s) => (
-    <button
-      key={s}
-      onClick={() => {
-        const i = items.find((item) => item.sender === s);
-        if (i) p.onThread(i.title); // 👈 只要觸發這個，useEffect 就會自動清空未讀！
-      }}
-    >
-      <Avatar name={s} />
-      {s}
-    </button>
-  ))}
-</div>
+                  {[...new Set(items.map((i) => i.sender))].map((s) => (
+                    <button
+                      key={s}
+                      onClick={() => {
+                        const i = items.find((item) => item.sender === s);
+                        if (i) p.onThread(i.title);
+                      }}
+                    >
                       <Avatar name={s} />
                       {s}
                     </button>
