@@ -538,7 +538,7 @@ function LineChatRows({ p, items, now }: { p: Props; items: Item[]; now: string 
 
 export function LineSkin(p: Props) {
   const { tab, setTab, q, setQ, items } = useContent(p, "聊天");
-  const now = storyNow(items);
+  const now = (p.virtualDate || storyNow(items.length ? items : [])) + " 23:59";
   useEffect(() => {
     if (p.thread) {
       items
