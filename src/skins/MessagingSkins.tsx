@@ -511,9 +511,14 @@ function LineChatRows({ p, items, now }: { p: Props; items: Item[]; now: string 
     <>
       {rows.map(({ name, last, unread, pinned }) => (
         <button
-          key={name}
+         key={name}
           className={`line-chat ${pinned ? "pinned" : ""}`}
-          onClick={() => { p.onThread(name); p.onRead(name); }}
+          onClick={() => {
+            p.onThread(name);
+            items
+              .filter((i) => i.title === name && !i.outgoing && !i.read)
+              .forEach((i) => p.onRead(i.id));
+          }}
         >
           <Avatar name={name} src={last.avatar} round />
           <span className="line-chat-main">
@@ -583,14 +588,19 @@ export function LineSkin(p: Props) {
                 </div>
                 <h4>好友</h4>
                 <div className="line-friends">
-                  {[...new Set(items.map((i) => i.sender))].map((s) => (
-                    <button
-                      key={s}
-                      onClick={() => {
-                        const i = items.find((i) => i.sender === s);
-                        if (i) p.onThread(i.title);
-                      }}
-                    >
+  {[...new Set(items.map((i) => i.sender))].map((s) => (
+    <button
+      key={s}
+      onClick={() => {
+        const i = items.find((item) => item.sender === s);
+        if (i) p.onThread(i.title); // 👈 只要觸發這個，useEffect 就會自動清空未讀！
+      }}
+    >
+      <Avatar name={s} />
+      {s}
+    </button>
+  ))}
+</div>
                       <Avatar name={s} />
                       {s}
                     </button>
