@@ -28,7 +28,9 @@ const set = (patch: Partial<PlayerState>) => {
 let pendingStart = 0;
 let lastSaved = -1;
 
+
 const posKey = (id: string) => "fp-pos-" + id;
+
 function savePos(reset = false) {
   if (!audio || !state.item) return;
   try {
@@ -37,8 +39,10 @@ function savePos(reset = false) {
       String(reset ? 0 : audio.currentTime),
     );
   } catch {
-     }
+    // 儲存失敗時忽略錯誤
+  }
 }
+
 function readPos(id: string) {
   try {
     const v = Number(localStorage.getItem(posKey(id)));
@@ -47,6 +51,7 @@ function readPos(id: string) {
     return 0;
   }
 }
+
 
 export function coverUrl(raw = "") {
   if (raw.startsWith("data:image/")) return raw;
