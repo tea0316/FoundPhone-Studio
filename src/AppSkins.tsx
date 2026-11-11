@@ -1,3 +1,4 @@
+/*ig、微信、WhatsAppApp 的模擬介面*/
 import { NativeComposer } from "./DeviceSystem";
 import { useSkinState } from "./skinState";
 import { useState } from "react";
@@ -117,7 +118,7 @@ function MessageList({
             ) : i.kind === "transfer" ? (
               <div className="skin-transfer">
                 ¥ {i.body}
-                <small>转账记录 · 虚构</small>
+                <small>轉帳紀錄 · 虛構</small>
               </div>
             ) : (
               i.body
@@ -211,12 +212,12 @@ export function WeChatSkin(p: SkinProps) {
         </strong>
         <button
           aria-label={
-            p.creator ? "新增内容" : p.thread ? "聊天详情" : "微信菜单"
+            p.creator ? "新增內容" : p.thread ? "聊天詳情" : "微信菜單"
           }
           onClick={
             p.creator
               ? p.onAdd
-              : () => (p.thread ? setUtility("聊天信息") : setMenu(!menu))
+              : () => (p.thread ? setUtility("聊天訊息") : setMenu(!menu))
           }
         >
           {p.thread ? <MoreHorizontal size={22} /> : <CirclePlus size={22} />}
@@ -224,13 +225,13 @@ export function WeChatSkin(p: SkinProps) {
       </div>
       {menu && (
         <div className="wx-popup-menu" role="menu">
-          {["搜索", "发起群聊", "添加朋友", "扫一扫", "收付款"].map((label) => (
+          {["搜尋", "發起群組聊天", "新增好友", "掃一掃", "收付款"].map((label) => (
             <button
               role="menuitem"
               key={label}
               onClick={() => {
                 setMenu(false);
-                if (label === "搜索") {
+                if (label === "搜尋") {
                   setSearchOpen(true);
                 } else setUtility(label);
               }}
@@ -242,7 +243,7 @@ export function WeChatSkin(p: SkinProps) {
       )}
       {utility ? (
         <div className="skin-scroll wx-utility">
-          {utility === "聊天信息" && (
+          {utility === "聊天訊息" && (
             <div className="wx-members">
               {[
                 ...new Set(
@@ -274,7 +275,7 @@ export function WeChatSkin(p: SkinProps) {
               </button>
             ))}
           {!p.items.some((i) => i.folder === utility) &&
-            utility !== "聊天信息" && <p className="skin-empty">暂无内容</p>}
+            utility !== "聊天訊息" && <p className="skin-empty">暫無內容</p>}
         </div>
       ) : p.thread ? (
         <>
@@ -307,10 +308,10 @@ export function WeChatSkin(p: SkinProps) {
               </div>
             </button>
           ))}
-          {!posts.length && <p className="skin-empty">暂无朋友圈动态</p>}
+          {!posts.length && <p className="skin-empty">暫無朋友圈動態</p>}
           {p.creator && (
             <button className="phone-add" onClick={p.onAdd}>
-              添加朋友圈动态
+              添加朋友圈動態
             </button>
           )}
         </div>
@@ -322,8 +323,8 @@ export function WeChatSkin(p: SkinProps) {
                 <label className="wx-search">
                   <Search size={14} />
                   <input
-                    aria-label="搜索微信内容"
-                    placeholder="搜索"
+                    aria-label="搜尋微信內容"
+                    placeholder="搜尋"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                   />
@@ -367,11 +368,11 @@ export function WeChatSkin(p: SkinProps) {
                     </button>
                   );
                 })}
-              {!conversations.length && <p className="skin-empty">暂无聊天</p>}
+              {!conversations.length && <p className="skin-empty">暫無聊天</p>}
             </>
-          ) : tab === "通讯录" ? (
+          ) : tab === "聯絡人" ? (
             <>
-              <div className="wx-section-label">联系人</div>
+              <div className="wx-section-label">聯絡人</div>
               {contacts.map((c) => (
                 <button
                   key={c}
@@ -392,12 +393,12 @@ export function WeChatSkin(p: SkinProps) {
                 </button>
               ))}
             </>
-          ) : tab === "发现" ? (
+          ) : tab === "發現" ? (
             <div className="wx-discover-groups">
               {[
                 [Camera, "朋友圈", "#26a958"],
-                [Play, "视频号", "#fa9d3b"],
-                [Music, "听一听", "#fa5151"],
+                [Play, "視頻號", "#fa9d3b"],
+                [Music, "聽一聽", "#fa5151"],
               ].map(([Icon, label, color]) => {
                 const Glyph = Icon as typeof Camera;
                 return (
@@ -420,27 +421,27 @@ export function WeChatSkin(p: SkinProps) {
           ) : (
             <>
               <div className="wx-profile">
-                <Avatar name={p.owner || "机主"} />
+                <Avatar name={p.owner || "機主"} />
                 <div>
-                  <h2>{p.owner || "机主"}</h2>
-                  <small>微信号：未设置</small>
+                  <h2>{p.owner || "機主"}</h2>
+                  <small>微信號：未設置</small>
                   <button
                     className="wx-profile-status"
-                    onClick={() => setUtility("状态")}
+                    onClick={() => setUtility("狀態")}
                   >
-                    ＋ 状态
+                    ＋ 狀態
                   </button>
                 </div>
               </div>
               <div className="wx-profile-menu">
                 {[
-                  [MessageCircle, "服务", "#07c160"],
+                  [MessageCircle, "服務", "#07c160"],
                   [Layers, "收藏", "#e8a828"],
                   [ImageIcon, "朋友圈", "#3a9bd9"],
                   [Layers, "作品", "#329dd8"],
-                  [ShoppingBag, "小店与卡包", "#ed7c59"],
+                  [ShoppingBag, "小店與卡包", "#ed7c59"],
                   [Smile, "表情", "#f7b900"],
-                  [Settings, "设置", "#1696d2"],
+                  [Settings, "設置", "#1696d2"],
                 ].map(([Icon, label, color]) => {
                   const Glyph = Icon as typeof Settings;
                   return (
@@ -475,7 +476,7 @@ export function WeChatSkin(p: SkinProps) {
                 ))}
               {p.creator && (
                 <button className="phone-add" onClick={p.onAdd}>
-                  编辑个人资料内容
+                  編輯個人檔案內容
                 </button>
               )}
             </>
@@ -486,8 +487,8 @@ export function WeChatSkin(p: SkinProps) {
         <nav className="wx-bottom">
           {[
             { label: "微信", icon: MessageCircle },
-            { label: "通讯录", icon: Users },
-            { label: "发现", icon: Compass },
+            { label: "聯絡人", icon: Users },
+            { label: "發現", icon: Compass },
             { label: "我", icon: User },
           ].map((t) => (
             <button
@@ -509,17 +510,17 @@ export function WhatsAppSkin(p: SkinProps) {
     [query, setQuery] = useState(""),
     [filter, setFilter] = useState("全部");
   const tabs = [
-    { label: "动态", icon: Compass },
-    { label: "通话", icon: Phone },
-    { label: "社区", icon: Users },
+    { label: "動態", icon: Compass },
+    { label: "通話", icon: Phone },
+    { label: "社區", icon: Users },
     { label: "聊天", icon: MessageCircle },
-    { label: "设置", icon: Settings },
+    { label: "設置", icon: Settings },
   ];
   const conversations = [
     ...new Set(
       p.items
-        .filter((i) => !["动态", "通话", "社区", "设置"].includes(i.folder))
-        .filter((i) => filter !== "未读" || !i.read)
+        .filter((i) => !["動態", "通話", "社區", "設置"].includes(i.folder))
+        .filter((i) => filter !== "未讀" || !i.read)
         .map((i) => i.title),
     ),
   ];
@@ -535,7 +536,7 @@ export function WhatsAppSkin(p: SkinProps) {
         </button>
         <strong>{p.thread || name}</strong>
         <button
-          aria-label={p.creator ? "新增内容" : "搜索内容"}
+          aria-label={p.creator ? "新增內容" : "搜尋內容"}
           onClick={
             p.creator
               ? p.onAdd
@@ -561,7 +562,7 @@ export function WhatsAppSkin(p: SkinProps) {
             />
             <div>
               <strong>{p.thread}</strong>
-              <small>联系人</small>
+              <small>聯絡人</small>
             </div>
             <Video size={18} />
             <Phone size={17} />
@@ -583,14 +584,14 @@ export function WhatsAppSkin(p: SkinProps) {
               <label className="wa-search">
                 <Search size={16} />
                 <input
-                  placeholder="搜索"
-                  aria-label="搜索WhatsApp"
+                  placeholder="搜尋"
+                  aria-label="搜尋WhatsApp"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                 />
               </label>
               <div className="wa-filters">
-                {["全部", "未读", "群组"].map((f) => (
+                {["全部", "未讀", "群組"].map((f) => (
                   <button
                     key={f}
                     className={filter === f ? "selected" : ""}
@@ -604,8 +605,8 @@ export function WhatsAppSkin(p: SkinProps) {
                 .filter((t) => t.includes(query))
                 .filter(
                   (t) =>
-                    filter !== "群组" ||
-                    p.items.some((i) => i.title === t && i.folder === "群组"),
+                    filter !== "群組" ||
+                    p.items.some((i) => i.title === t && i.folder === "群組"),
                 )
                 .map((t) => {
                   const last = p.items.filter((i) => i.title === t).at(-1)!;
@@ -631,14 +632,14 @@ export function WhatsAppSkin(p: SkinProps) {
                   );
                 })}
             </>
-          ) : tab === "设置" ? (
+          ) : tab === "設置" ? (
             <>
               <div className="wa-settings-profile">
                 <Avatar name="我" round />
-                <h2>个人资料</h2>
+                <h2>個人資料</h2>
               </div>
               {p.items
-                .filter((i) => i.folder === "设置")
+                .filter((i) => i.folder === "設置")
                 .map((i) => (
                   <button
                     key={i.id}
@@ -652,12 +653,12 @@ export function WhatsAppSkin(p: SkinProps) {
             </>
           ) : (
             <>
-              {tab === "动态" && (
+              {tab === "動態" && (
                 <div className="wa-status">
                   <Avatar name="我" round />
-                  <span>我的状态</span>
+                  <span>我的狀態</span>
                   {p.creator && (
-                    <button aria-label="添加状态" onClick={p.onAdd}>
+                    <button aria-label="添加狀態" onClick={p.onAdd}>
                       <Plus size={17} />
                     </button>
                   )}
@@ -666,7 +667,7 @@ export function WhatsAppSkin(p: SkinProps) {
               {p.items
                 .filter(
                   (i) =>
-                    i.folder === tab || (tab === "通话" && i.kind === "call"),
+                    i.folder === tab || (tab === "通話" && i.kind === "call"),
                 )
                 .map((i) => (
                   <button
@@ -680,7 +681,7 @@ export function WhatsAppSkin(p: SkinProps) {
                       <p>{i.body}</p>
                     </div>
                     <span>
-                      {tab === "通话" ? (
+                      {tab === "通話" ? (
                         <Phone size={17} />
                       ) : (
                         <ChevronLeft size={15} />
@@ -689,13 +690,13 @@ export function WhatsAppSkin(p: SkinProps) {
                   </button>
                 ))}
               {!p.items.some((i) => i.folder === tab) && (
-                <p className="skin-empty">暂无{tab}内容</p>
+                <p className="skin-empty">暫無{tab}內容</p>
               )}
             </>
           )}
           {p.creator && (
             <button className="phone-add" onClick={p.onAdd}>
-              添加{tab === "聊天" ? "聊天" : tab}内容
+              添加{tab === "聊天" ? "聊天" : tab}內容
             </button>
           )}
         </div>
@@ -718,7 +719,7 @@ export function WhatsAppSkin(p: SkinProps) {
   );
 }
 export function InstagramSkin(p: SkinProps) {
-  const [tab, setTab] = useState("首页"),
+  const [tab, setTab] = useState("首頁"),
     [dm, setDm] = useState(false),
     [query, setQuery] = useState(""),
     [likes, setLikes] = useSkinState<string[]>(p, "likes", []),
@@ -727,16 +728,16 @@ export function InstagramSkin(p: SkinProps) {
   const posts = p.items.filter(
       (i) =>
         i.kind === "post" ||
-        !["私信", "Story", "Reels", "个人主页"].includes(i.folder),
+        !["私訊", "限時動態", "連續短片", "個人檔案"].includes(i.folder),
     ),
     stories = p.items.filter((i) => i.folder === "Story"),
     reels = p.items.filter((i) => i.kind === "video" || i.folder === "Reels"),
-    messages = p.items.filter((i) => i.folder === "私信");
+    messages = p.items.filter((i) => i.folder === "私訊");
   const tabs = [
-    { label: "首页", icon: Home },
-    { label: "搜索", icon: Search },
+    { label: "首頁", icon: Home },
+    { label: "搜尋", icon: Search },
     { label: "Reels", icon: Play },
-    { label: "个人主页", icon: User },
+    { label: "個人檔案", icon: User },
   ];
   const shown = (
     showSaved ? posts.filter((i) => saved.includes(i.id)) : posts
@@ -750,14 +751,14 @@ export function InstagramSkin(p: SkinProps) {
         >
           <ChevronLeft size={22} />
         </button>
-        <strong>{dm ? "私信" : p.name}</strong>
+        <strong>{dm ? "私訊" : p.name}</strong>
         <div>
           {p.creator && (
-            <button aria-label="新增内容" onClick={p.onAdd}>
+            <button aria-label="新增內容" onClick={p.onAdd}>
               <Plus size={21} />
             </button>
           )}
-          <button aria-label="Instagram 私信" onClick={() => setDm(!dm)}>
+          <button aria-label="Instagram 私訊" onClick={() => setDm(!dm)}>
             <Send size={20} />
           </button>
         </div>
@@ -778,14 +779,14 @@ export function InstagramSkin(p: SkinProps) {
                 </div>
               </button>
             ))}
-            {!messages.length && <p className="skin-empty">暂无私信</p>}
+            {!messages.length && <p className="skin-empty">暫無私訊</p>}
             {p.creator && (
               <button className="phone-add" onClick={p.onAdd}>
-                添加私信
+                添加私訊
               </button>
             )}
           </>
-        ) : tab === "首页" ? (
+        ) : tab === "首頁" ? (
           <>
             <div className="ig-stories">
               <button
@@ -802,7 +803,7 @@ export function InstagramSkin(p: SkinProps) {
                 <span>
                   <Avatar name="我" round />
                 </span>
-                <small>你的快拍</small>
+                <small>你的限時動態</small>
               </button>
               {stories.map((i) => (
                 <button
@@ -823,7 +824,7 @@ export function InstagramSkin(p: SkinProps) {
                   <Avatar name={i.sender} round />
                   <strong>{i.sender}</strong>
                   <button
-                    aria-label={`帖子详情${i.title}`}
+                    aria-label={`貼文詳情${i.title}`}
                     onClick={() => p.onItem(i)}
                   >
                     <MoreHorizontal size={19} />
@@ -834,7 +835,7 @@ export function InstagramSkin(p: SkinProps) {
                 </button>
                 <div className="ig-post-controls">
                   <button
-                    aria-label={`喜欢${i.title}`}
+                    aria-label={`喜歡${i.title}`}
                     onClick={() =>
                       setLikes(
                         likes.includes(i.id)
@@ -850,7 +851,7 @@ export function InstagramSkin(p: SkinProps) {
                     />
                   </button>
                   <button
-                    aria-label={`评论${i.title}`}
+                    aria-label={`評論${i.title}`}
                     onClick={() => p.onItem(i)}
                   >
                     <MessageCircle size={22} />
@@ -862,7 +863,7 @@ export function InstagramSkin(p: SkinProps) {
                     <Send size={21} />
                   </button>
                   <button
-                    aria-label={`收藏${i.title}`}
+                    aria-label={`珍藏${i.title}`}
                     onClick={() =>
                       setSaved(
                         saved.includes(i.id)
@@ -879,27 +880,27 @@ export function InstagramSkin(p: SkinProps) {
                 </div>
                 <div className="ig-post-caption">
                   <strong>
-                    {i.likes + (likes.includes(i.id) ? 1 : 0)} 次赞
+                    {i.likes + (likes.includes(i.id) ? 1 : 0)} 個按讚
                   </strong>
                   <p>
                     <b>{i.sender}</b> {i.body}
                   </p>
                   <button onClick={() => p.onItem(i)}>
-                    查看全部 {i.comments.length} 条评论
+                    查看全部 {i.comments.length} 條評論
                   </button>
                   <time>{i.time}</time>
                 </div>
               </article>
             ))}
           </>
-        ) : tab === "搜索" ? (
+        ) : tab === "搜尋" ? (
           <>
             <label className="ig-search">
               <Search size={15} />
               <input
                 value={query}
-                aria-label="搜索Instagram"
-                placeholder="搜索"
+                aria-label="搜尋Instagram"
+                placeholder="搜尋"
                 onChange={(e) => setQuery(e.target.value)}
               />
             </label>
@@ -921,7 +922,7 @@ export function InstagramSkin(p: SkinProps) {
                 </button>
               </div>
             ))}
-            {!reels.length && <p className="skin-empty">暂无 Reels</p>}
+            {!reels.length && <p className="skin-empty">暫無 Reels</p>}
           </>
         ) : (
           <>
@@ -929,32 +930,32 @@ export function InstagramSkin(p: SkinProps) {
               <Avatar name={posts[0]?.sender ?? "我"} round />
               <div>
                 <strong>{posts.length}</strong>
-                <small>帖子</small>
+                <small>貼文</small>
               </div>
               <div>
                 <strong>0</strong>
-                <small>关注者</small>
+                <small>關注者</small>
               </div>
               <div>
                 <strong>0</strong>
-                <small>正在关注</small>
+                <small>正在關注</small>
               </div>
             </div>
             <h3 className="ig-profile-name">{posts[0]?.sender ?? "我"}</h3>
             <div className="ig-profile-tabs">
-              <button aria-label="帖子网格" onClick={() => setShowSaved(false)}>
+              <button aria-label="貼文" onClick={() => setShowSaved(false)}>
                 <Grid size={21} />
               </button>
               <button
-                aria-label="已收藏帖子"
+                aria-label="已珍藏貼文"
                 onClick={() => setShowSaved(true)}
               >
                 <Bookmark size={21} />
               </button>
               <button
-                aria-label="资料内容"
+                aria-label="資料內容"
                 onClick={() => {
-                  const i = p.items.find((i) => i.folder === "个人主页");
+                  const i = p.items.find((i) => i.folder === "個人檔案");
                   if (i) p.onItem(i);
                   else if (p.creator) p.onAdd();
                 }}

@@ -1826,14 +1826,34 @@
   text-align: center;
 }
 .line-friends > button .catalog-avatar {
-  width: 50px;
-  height: 50px;
+  width: 48px;
+  height: 48px;
 }
 .line-peer {
   font-size: 13px;
   padding: 13px;
   text-align: center;
   border-bottom: 1px solid #eee;
+}
+.line-row .catalog-avatar {
+  width: 40px;
+  height: 40px;
+  flex: none;
+}
+.line-avatar-gap {
+  width: 40px; 
+}
+
+.line-chat .catalog-avatar {
+  width: 46px;
+  height: 46px;
+}
+
+.catalog-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
 }
 
 /* ==========================================
@@ -1900,7 +1920,16 @@
 }
 
 .line-row.out .line-msg {
-  flex-direction: row-reverse;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.line-meta {
+  flex-shrink: 0;
+  min-width: max-content;
+}
+.line-row.out .line-meta {
+  align-items: flex-end;
 }
 
 .line-meta {
@@ -1937,8 +1966,8 @@
 }
 
 .line-row.out .line-bubble {
-  background: #06c755;
-  color: #fff;
+  background: #fff;
+  color: #111;
 }
 
 .line-bubble.media {
@@ -2087,6 +2116,22 @@
   gap: 12px;
   color: #111;
   min-width: 60px;
+}
+
+/* 發送的訊息 */
+.line-col {
+  max-width: 78%;
+}
+.line-bubble {
+  max-width: 100%;
+}
+.line-row.out .line-col {
+  align-items: flex-end;
+}
+.line-meta {
+  flex-shrink: 0;
+  min-width: max-content;
+  justify-content: flex-end;
 }
 
 .line-chat-header span svg {
@@ -3013,8 +3058,16 @@
   gap: 8px;
   padding: 0 13px 15px;
 }
+.spotify-playlists > button,
+.spotify-playlists > button:active,
+.spotify-playlists > button:focus,
+.spotify-playlists > button:hover {
+  background: #4a6555; 
+  border-color: transparent;
+  outline: none;
+}
 .spotify-playlists > button {
-  background: #2d2d2d;
+  background: #4a6555;;
   border-radius: 5px;
   display: flex;
   align-items: center;
@@ -3022,11 +3075,12 @@
   padding: 0;
   gap: 9px;
   min-height: 54px;
+  max-width: 115px;
   overflow: hidden;
 }
 .spotify-playlists > button > svg {
-  background: #4a6555;
-  color: #c0d3bd;
+  background: #4a6555;;
+  color: #FFFFFF;
   width: 50px;
   height: 54px;
   padding: 13px;
@@ -4393,3 +4447,9 @@
 .catalog-slot[hidden] {
   display: none;
 }
+.track-player .catalog-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+}
+

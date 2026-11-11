@@ -500,9 +500,11 @@ function LineChatRows({ p, items, now }: { p: Props; items: Item[]; now: string 
     .map((name) => {
       const mine = items.filter((i) => i.title === name);
       const last = mine.at(-1)!;
+      const avatar = [...mine].reverse().find((i) => !i.outgoing && i.avatar)?.avatar;
       return {
         name,
         last,
+        avatar,
         unread: mine.filter((i) => !i.outgoing && !i.read).length,
         pinned: meta(last, "pinned", "") === "1",
       };
@@ -511,7 +513,7 @@ function LineChatRows({ p, items, now }: { p: Props; items: Item[]; now: string 
 
   return (
     <>
-      {rows.map(({ name, last, unread, pinned }) => (
+      {rows.map(({ name, last, avatar, unread, pinned }) => (
         <button
           key={name}
           className={`line-chat ${pinned ? "pinned" : ""}`}
@@ -520,7 +522,7 @@ function LineChatRows({ p, items, now }: { p: Props; items: Item[]; now: string 
             p.onRead(name);
           }}
         >
-          <Avatar name={name} src={last.avatar} round />
+          <Avatar name={name} src={avatar} round />
           <span className="line-chat-main">
             <strong>{name}</strong>
             <p>{preview(last)}</p>
@@ -588,7 +590,7 @@ export function LineSkin(p: Props) {
                 </div>
                 <h4>好友</h4>
                 <div className="line-friends">
-                  {[...new Set(items.map((i) => i.sender))].map((s) => {
+                  {[...new Set(items.filter((i) => !i.outgoing).map((i) => i.sender))].map((s) => {
                     const first = items.find((item) => item.sender === s);
                     const avatar = items.find(
                       (item) => item.sender === s && item.avatar,

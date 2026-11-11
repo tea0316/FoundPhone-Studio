@@ -6,7 +6,7 @@ import JSZip from "jszip";
 const destination = path.resolve(process.argv[2] || "work/release-template");
 try {
   await access(destination);
-  throw Error("发布目录已存在；请先检查，禁止覆盖。");
+  throw Error("發佈目錄已存在；請先檢查，禁止覆蓋。");
 } catch (e) {
   if (e.code !== "ENOENT") throw e;
 }
@@ -63,7 +63,7 @@ for (const file of files) {
       text,
     )
   )
-    throw Error("疑似凭据，请检查文件：" + file);
+    throw Error("疑似機密憑證，請檢查檔案：" + file);
   const target = path.join(destination, file);
   await mkdir(path.dirname(target), { recursive: true });
   await writeFile(target, bytes);
@@ -93,5 +93,5 @@ await writeFile(
   ) + "\n",
 );
 console.log(
-  `已准备 ${manifest.length} 个文件，排除 ${excluded.length} 个本地/历史文件；ZIP CRC32通过。没有创建仓库或推送。`,
+  `已準備 ${manifest.length} 個檔案，排除 ${excluded.length} 個本機/歷史檔案；ZIP CRC32 驗證通過。未建立儲存庫或進行推送。`,
 );

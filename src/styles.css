@@ -762,7 +762,7 @@ svg {
   position: absolute;
   inset: -15px;
   z-index: -1;
-  background: url("/FoundPhone-Studio/wallpaper.jpg") center / cover no-repeat;
+  background: url("/wallpaper.jpg") center / cover no-repeat;
   filter: blur(15px);
   transform: scale(1.05);
 }
@@ -772,7 +772,7 @@ svg {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: url("/FoundPhone-Studio/wallpaper.jpg") center / contain no-repeat;
+  background: url("/wallpaper.jpg") center / contain no-repeat;
 }
 .wallpaper-orb {
   position: absolute;

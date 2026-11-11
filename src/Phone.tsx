@@ -40,6 +40,14 @@ import {
   Suspense,
   type CSSProperties,
 } from "react";
+const realNow = () => {
+  const d = new Date();
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return {
+    time: pad(d.getHours()) + ":" + pad(d.getMinutes()),
+    date: d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()),
+  };
+};
 import { AnimatePresence } from "motion/react";
 import {
   ChevronLeft,
@@ -224,7 +232,7 @@ function PhoneRuntime({
     if (!creator && !external && ready)
       void db.saves
         .put({ id: work.id, state: own })
-        .catch(() => setLoadError("存檔失败，請檢查瀏覽器儲存權限。"));
+        .catch(() => setLoadError("存檔失敗，請檢查瀏覽器儲存權限。"));
   }, [own, creator, work.id, external, ready]);
   useEffect(() => {
     if (creator || !ready) return;
@@ -283,14 +291,65 @@ function PhoneRuntime({
       setPinOpen(false);
       event("password", pin);
     } else {
-      setPinError("密码不正确");
+      setPinError("密碼不正確");
       setPinOpen(true);
     }
   };
   useEffect(() => {
     if (app && !work.apps.some((a) => a.id === app && a.installed)) setApp("");
   }, [app, work.apps]);
-  const displayTime = creator ? work.phone.time : s.time || work.phone.time;
+
+const [clock, setClock] = useState(() => new Date());
+useEffect(() => {
+  const timer = setInterval(() => setClock(new Date()), 1000);
+  return () => clearInterval(timer);
+}, []);
+const pad = (n: number) => String(n).padStart(2, "0");
+const realTime = pad(clock.getHours()) + ":" + pad(clock.getMinutes());
+const realDate =
+  clock.getFullYear() + "-" + pad(clock.getMonth() + 1) + "-" + pad(clock.getDate());
+const displayTime = creator ? work.phone.time : realTime;
+const displayDate = creator ? work.phone.date : realDate;
+
+/*電量消耗模擬*/
+
+const [battery, setBattery] = useState(work.phone.battery);
+const [charging, setCharging] = useState(false);
+
+useEffect(() => {
+  if (creator) return; // 
+  const timer = setInterval(
+    () =>
+      setBattery((v) =>
+        charging ? Math.min(100, v + 1) : Math.max(1, v - 1),
+      ),
+    charging ? 30000 : 60000, // 充電時每 30秒 +1%，放電時每 60 秒 -1%
+  );
+
+  return () => clearInterval(timer); // 
+}, [charging, creator]);
+const level = creator ? work.phone.battery : battery;
+useEffect(() => {
+  if (level >= 100 && charging) {
+    setCharging(false); // 當電量達到 100% 且正在充電時，自動關閉充電狀態
+  }
+}, [level, charging]); // 只要電量或充電狀態改變，就會觸發檢查
+const lowWarned = useRef(false);
+useEffect(() => {
+  if (creator) return;
+
+  if (level > 20) lowWarned.current = false;
+
+  if (level <= 20 && !charging && !lowWarned.current) {
+    lowWarned.current = true;
+    setBanner(`電量不足 ${level}%，請盡快充電`);
+
+    const timer = setTimeout(() => setBanner(""), 4500);
+    return () => clearTimeout(timer);
+  }
+}, [level, charging, creator]);
+
+
   const plugin = getApp(app);
   useEffect(() => {
     const count = s.notifications.length;
@@ -405,11 +464,54 @@ function PhoneRuntime({
             >
               <StatusGlyph kind="cellular" />
               <StatusGlyph kind="wifi" />
-              <span
-                className={`ios-battery${work.phone.battery <= 20 ? " low-battery" : ""}`}
-              >
-                <span style={{ width: `${work.phone.battery}%` }} />
-                <b>{work.phone.battery}</b>
+ <span
+    className={`ios-battery${level <= 20 ? " low-battery" : ""}`}
+onClick={(e) => {
+  e.stopPropagation();
+
+  //  當電量已滿（>= 100%）
+  if (level >= 100) {
+    setCharging(false); 
+    return;              
+  }
+
+  //  未滿電時
+  setCharging((v) => !v);
+}}
+  >
+    <span
+      style={{
+        width: `${level}%`,
+        background: charging
+          ? "#34c759"
+          : level <= 10 // 電量極低 (<=10%)：警告紅色
+            ? "#ff3b30"
+            : undefined,
+      }}
+    />
+<b
+  style={{
+    color: charging
+      ? "#34c759"
+      : level <= 10
+        ? "#ff3b30"
+        : undefined,
+  }}
+>
+  {level}
+{charging && (
+  <i
+    style={{
+      fontSize: 9,
+      fontStyle: "normal",
+      marginLeft: 1,
+      verticalAlign: "1px",
+    }}
+  >
+    ⚡
+  </i>
+)}
+</b>
               </span>
             </button>
           </div>
@@ -418,7 +520,7 @@ function PhoneRuntime({
               <DeviceLock
                 work={
                   s.date
-                    ? { ...work, phone: { ...work.phone, date: s.date } }
+                    ? { ...work, phone: { ...work.phone, date: displayDate } }
                     : work
                 }
                 time={displayTime}
@@ -500,7 +602,7 @@ function PhoneRuntime({
                     name={small ? undefined : a.name}
                     small={small}
                     custom={a.icon}
-                    date={s.date || work.phone.date}
+                    date={displayDate}
                     time={s.time}
                   />
                 )}
@@ -530,13 +632,13 @@ function PhoneRuntime({
                   ))}
               </div>
               <button className="glass-btn" onClick={() => setFolder("")}>
-                關閉文件夹
+                關閉資料夾
               </button>
             </div>
           )}
           {panel === "control" && (
             <ControlCenter
-              battery={work.phone.battery}
+              battery={level}
               network={work.phone.network}
               close={() => setPanel("")}
             />
@@ -564,7 +666,7 @@ function PhoneRuntime({
                       onDismiss={dismissNotice}
                     />
                   ) : (
-                    <p>没有新通知</p>
+                    <p>沒有新通知</p>
                   )}
                 </>
               ) : panel === "search" ? (
@@ -579,7 +681,7 @@ function PhoneRuntime({
           )}
           {!creator && s.choices.length > 0 && !locked && (
             <div className="story-overlay">
-              <span className="eyebrow">故事来到一个岔路口</span>
+              <span className="eyebrow">故事來到一个岔路口</span>
               <h3>你會如何選擇？</h3>
               {s.choices.map((c) => (
                 <button
@@ -988,8 +1090,8 @@ function AppContent({
             <Skin
               appId={app.id}
               owner={work.phone.owner}
-              virtualTime={state.time}
-              virtualDate={state.date || work.phone.date}
+              virtualTime={realNow().time}
+              virtualDate={realNow().date}
               ui={state.ui?.[app.id]}
               onUi={creator ? undefined : onUi}
               name={name}

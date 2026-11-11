@@ -26,7 +26,7 @@ export function ConnectivityModule() {
   return (
     <div className="cc-connect">
       <button
-        aria-label="飞行模式"
+        aria-label="飛航模式"
         aria-pressed={airplaneMode}
         className={airplaneMode ? "orange" : ""}
         onClick={() => setAirplaneMode(!airplaneMode)}
@@ -34,7 +34,7 @@ export function ConnectivityModule() {
         <Plane />
       </button>
       <button
-        aria-label="隔空投送"
+        aria-label="AirDrop"
         aria-pressed={airdrop}
         className={airdrop ? "blue" : ""}
         onClick={() => setAirdrop(!airdrop)}
@@ -51,7 +51,7 @@ export function ConnectivityModule() {
       </button>
       <span className="cc-small-connections">
         <button
-          aria-label="蜂窝数据"
+          aria-label="行動數據"
           aria-pressed={cellularEnabled}
           className={cellularEnabled ? "green" : ""}
           onClick={() => setCellularEnabled(!cellularEnabled)}
@@ -59,7 +59,7 @@ export function ConnectivityModule() {
           <Signal />
         </button>
         <button
-          aria-label="蓝牙"
+          aria-label="藍牙"
           aria-pressed={bluetoothEnabled}
           className={bluetoothEnabled ? "blue" : ""}
           onClick={() => setBluetoothEnabled(!bluetoothEnabled)}
@@ -67,7 +67,7 @@ export function ConnectivityModule() {
           <Bluetooth />
         </button>
         <button
-          aria-label="个人热点"
+          aria-label="個人熱點"
           aria-pressed={hotspot}
           onClick={() => setHotspot(!hotspot)}
           className={hotspot ? "green" : ""}
@@ -75,7 +75,7 @@ export function ConnectivityModule() {
           <Link />
         </button>
         <button
-          aria-label="网络连接"
+          aria-label="網路連線"
           onClick={() => setCellularEnabled(!cellularEnabled)}
         >
           <Globe />
@@ -97,7 +97,7 @@ export function SliderModule({
   return (
     <label className="cc-slider">
       <input
-        aria-label={type === "brightness" ? "屏幕亮度" : "音量"}
+        aria-label={type === "brightness" ? "螢幕亮度" : "音量"}
         type="range"
         min={type === "brightness" ? 20 : 0}
         max="100"

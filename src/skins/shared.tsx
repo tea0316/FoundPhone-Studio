@@ -29,7 +29,7 @@ export function Header({ p, children }: { p: Props; children?: ReactNode }) {
       <div>
         {children}
         {p.creator && (
-          <button aria-label="新增内容" onClick={p.onAdd}>
+          <button aria-label="新增內容" onClick={p.onAdd}>
             <Plus size={21} />
           </button>
         )}
@@ -66,7 +66,7 @@ export function Tabs({
 export function SearchBox({
   value,
   set,
-  placeholder = "搜索",
+  placeholder = "搜尋",
 }: {
   value: string;
   set: (s: string) => void;
@@ -111,7 +111,11 @@ export function Media({
   item: Item;
   className?: string;
 }) {
-  const src = safeMedia(item.media);
+  const raw = item.media ?? "";
+const local = /^\/[\w./-]+\.(png|jpe?g|webp|gif|mp4|webm|mp3|m4a|wav)$/i.test(raw)
+  ? import.meta.env.BASE_URL + raw.slice(1)
+  : "";
+const src = safeMedia(raw) || local;
   return src ? (
     item.kind === "audio" ? (
       <audio className={className} controls src={src} />
@@ -162,14 +166,14 @@ export function Row({
 }
 export function Empty({
   items,
-  label = "暂无内容",
+  label = "暫無內容",
 }: {
   items: Item[];
   label?: string;
 }) {
   return !items.length ? <p className="catalog-empty">{label}</p> : null;
 }
-export function Add({ p, label = "添加内容" }: { p: Props; label?: string }) {
+export function Add({ p, label = "添加內容" }: { p: Props; label?: string }) {
   return p.creator ? (
     <button className="catalog-add" onClick={p.onAdd}>
       <Plus size={15} />
@@ -193,6 +197,6 @@ export function useContent(p: Props, first: string) {
   );
   return { tab, setTab, q, setQ, items };
 }
-export function groupItems(items: Item[], fallback = "未分类") {
+export function groupItems(items: Item[], fallback = "未分類") {
   return [...new Set(items.map((i) => i.folder || fallback))];
 }

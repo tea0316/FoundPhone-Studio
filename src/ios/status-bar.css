@@ -14,8 +14,10 @@
 }
 .ios18 .status-silent {
   width: 13px;
-  height: 17px;
+  height: 15px;
   flex: none;
+  margin-left: 5px;
+  margin-top: 4px;
 }
 .ios18 .status-bar > .signals {
   display: flex;
@@ -31,7 +33,7 @@
   height: 16px;
 }
 .ios18 .signals .ios-battery {
-  width: 25px;
+  width: 32px;
   height: 14px;
   border: 0;
   border-radius: 4.5px;

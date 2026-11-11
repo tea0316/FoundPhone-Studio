@@ -102,18 +102,18 @@ export function AppManager({
               {[
                 "全部",
                 "系统",
-                "通讯",
+                "通訊",
                 "社交",
                 "影音",
                 "生活",
                 "工具",
-                "自定义",
+                "自定義",
               ].map((c) => (
                 <option key={c}>{c}</option>
               ))}
             </select>
             <select
-              aria-label="安装筛选"
+              aria-label="安裝篩選"
               value={status}
               onChange={(e) => setStatus(e.target.value)}
             >
@@ -126,17 +126,17 @@ export function AppManager({
               onClick={() => setShowFolder(!showFolder)}
             >
               <FolderPlus size={15} />
-              创建文件夹
+              安裝篩選
             </button>
           </div>
           {showFolder && (
             <section className="folder-builder">
               <label>
-                文件夹名称
+                資料夾名稱
                 <input
                   value={folder}
                   onChange={(e) => setFolder(e.target.value)}
-                  placeholder="文件夹名称"
+                  placeholder="資料夾名稱"
                 />
               </label>
               <div className="folder-app-picks">
@@ -175,12 +175,12 @@ export function AppManager({
                   setFolderApps([]);
                 }}
               >
-                保存文件夹
+                保存資料夾
               </button>
             </section>
           )}
           <div className="library-layout">
-            <div className="library-catalog" aria-label="App 目录">
+            <div className="library-catalog" aria-label="App 目錄">
               {filtered.map((a) => (
                 <article
                   key={a.id}
@@ -195,7 +195,7 @@ export function AppManager({
                   <div className="library-app-main">
                     <button
                       className="drag-grip"
-                      aria-label={`拖动${a.name}排序`}
+                      aria-label={`移動${a.name}排序`}
                       disabled={!a.installed}
                       draggable={false}
                       onDragStart={(e) => {
@@ -239,8 +239,8 @@ export function AppManager({
                           {a.installed
                             ? a.visible
                               ? "已安装"
-                              : "仅 App 资源库"
-                            : "未安装"}
+                              : "僅 App 資料庫"
+                            : "未安裝"}
                         </small>
                       </span>
                     </button>
@@ -254,14 +254,14 @@ export function AppManager({
                     ) : (
                       <button
                         className="library-install"
-                        aria-label={`安装${a.name}`}
+                        aria-label={`安裝${a.name}`}
                         onClick={() => {
                           onChange((w) => installApp(w, a.id));
                           setSelected(a.id);
                         }}
                       >
                         <Download size={14} />
-                        安装
+                        安裝
                       </button>
                     )}
                   </div>
@@ -304,21 +304,21 @@ export function AppManager({
                       </button>
                       <button
                         className="danger"
-                        aria-label={`卸载${a.name}`}
+                        aria-label={`解除安裝${a.name}`}
                         onClick={() => {
                           setUninstall(a.id);
                           setKeep(true);
                         }}
                       >
                         <Trash2 size={12} />
-                        卸载
+                        解除安裝
                       </button>
                     </div>
                   )}
                 </article>
               ))}
               {!filtered.length && (
-                <p className="library-empty">没有匹配的 App</p>
+                <p className="library-empty">沒有匹配的 App</p>
               )}
             </div>
             <aside className="app-properties">
@@ -326,29 +326,29 @@ export function AppManager({
                 <>
                   <h3>{current.name}</h3>
                   <label>
-                    App 名称
+                    App 名稱
                     <input
-                      aria-label="自定义 App 名称"
+                      aria-label="自定義 App 名稱"
                       value={current.name}
                       onChange={(e) => update({ name: e.target.value })}
                     />
                   </label>
                   <label>
-                    图标文字
+                    圖片文字
                     <input
-                      aria-label="自定义图标文字"
+                      aria-label="自定義圖片文字"
                       maxLength={4}
                       value={
                         current.icon.startsWith("data:") ? "" : current.icon
                       }
-                      placeholder="使用默认图标"
+                      placeholder="使用默認圖片"
                       onChange={(e) => update({ icon: e.target.value })}
                     />
                   </label>
                   <label className="icon-upload">
-                    上传图标
+                    上傳圖片
                     <input
-                      aria-label="上传 App 图标"
+                      aria-label="上傳 App 圖片"
                       type="file"
                       accept="image/png,image/jpeg,image/webp"
                       onChange={async (e) => {
@@ -367,13 +367,13 @@ export function AppManager({
                       className="text-button"
                       onClick={() => update({ icon: "" })}
                     >
-                      恢复默认图标
+                      恢復預設圖示
                     </button>
                   )}
                   <label>
-                    文件夹
+                    資料夾
                     <input
-                      aria-label="App 文件夹"
+                      aria-label="App 資料夾"
                       value={current.folder}
                       placeholder="留空放在桌面"
                       onChange={(e) =>
@@ -396,7 +396,7 @@ export function AppManager({
                             (a) => a.installed && a.visible && a.dock,
                           ).length >= 4
                         ) {
-                          setError("Dock 最多放置 4 个 App");
+                          setError("Dock 最多放置 4 個 App");
                           return;
                         }
                         update({
@@ -409,19 +409,19 @@ export function AppManager({
                     放入 Dock
                   </label>
                   <small>
-                    {(work.data[current.id] ?? []).length} 条创作内容
+                    {(work.data[current.id] ?? []).length} 條創作內容
                   </small>
                 </>
               ) : (
-                <p>选择已安装的 App，编辑名称、图标与文件夹。</p>
+                <p>選擇已安裝的 App，編輯名稱、圖示與資料夾。</p>
               )}
               <div className="custom-app-form">
                 <label>
-                  自定义 App
+                  自定義 App
                   <input
                     value={customName}
                     onChange={(e) => setCustomName(e.target.value)}
-                    placeholder="App 名称"
+                    placeholder="App 名稱"
                   />
                 </label>
                 <button
@@ -448,8 +448,8 @@ export function AppManager({
         </div>
         <footer>
           <span>
-            {work.apps.filter((a) => a.installed).length} 个已安装 ·
-            拖动手柄排序
+            {work.apps.filter((a) => a.installed).length} 個已安裝 ·
+            移動控點排序
           </span>
           <button className="primary" onClick={onClose}>
             <Check size={14} />
@@ -459,22 +459,22 @@ export function AppManager({
       </Modal>
       {uninstall && (
         <Modal
-          title={`卸载${catalog.find((a) => a.id === uninstall)?.name}？`}
+          title={`解除安裝${catalog.find((a) => a.id === uninstall)?.name}？`}
           onClose={() => setUninstall("")}
         >
           <div className="editor-fields">
-            <p>卸载后将从手机和 App 资源库移除。</p>
+            <p>解除安裝後，將從手機和 App 資料庫中移除。</p>
             <label className="inline-check">
               <input
                 type="checkbox"
                 checked={keep}
                 onChange={(e) => setKeep(e.target.checked)}
               />
-              保留创作数据，重新安装后恢复
+              保留創作資料，重新安裝後恢復
             </label>
             {!keep && (
               <p className="error">
-                将删除此 App 的全部创作内容。引用这些内容的剧情可能失效。
+                將刪除此 App 的全部創作內容。引用這些內容的劇情可能失效。
               </p>
             )}
           </div>
@@ -489,7 +489,7 @@ export function AppManager({
                 setUninstall("");
               }}
             >
-              确认卸载{keep ? "并保留数据" : "并删除数据"}
+              確認解除安裝{keep ? "並保留資料" : "並刪除資料"}
             </button>
           </footer>
         </Modal>

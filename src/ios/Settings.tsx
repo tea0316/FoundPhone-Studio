@@ -28,7 +28,7 @@ const groups: Row[][] = [
     [Plane, "飛航模式", "#ff9500"],
     [Wifi, "Wi-Fi", "#007aff"],
     [Bluetooth, "藍牙", "#007aff"],
-    [Signal, "行動網路", "#34c759"],
+    [Signal, "行動數據", "#34c759"],
     [Link, "個人熱點", "#65ce88"],
     [Battery, "電池", "#34c759"],
     [Globe, "VPN", "#007aff"],

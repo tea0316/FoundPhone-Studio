@@ -2,6 +2,8 @@
  * Used under author permission reported by the user, 2026-10-25. Not relicensed MIT.
  * Original data, media, URLs and global selectors excluded; selectors scoped only.
  */
+ 
+ /*Instagram、KakaoTalk 和 X（原 Twitter）模擬介面的 CSS 樣式表/
 .mymy-ui .ig {
   display: flex;
   flex-direction: column;

@@ -10,7 +10,7 @@ export function UnlockHandle({ onUnlock }: { onUnlock: () => void }) {
   return (
     <motion.button
       className="unlock-btn swipe-unlock"
-      aria-label="轻触解锁"
+      aria-label="輕觸解鎖"
       drag="y"
       dragConstraints={{ top: 0, bottom: 0 }}
       dragElastic={0.1}

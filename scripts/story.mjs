@@ -68,13 +68,13 @@ function positions(text) {
 try {
   source = await readFile(file, "utf8");
   if (Buffer.byteLength(source) > 100 * 1024 * 1024)
-    throw Error("脚本不能超过100MB");
+    throw Error("腳本不能超過 100MB");
   json = source;
   if (/\.md$/i.test(file)) {
     const match = /```json\s*\n([\s\S]*?)```/.exec(source);
     if (!match)
       throw Error(
-        "Markdown 需要一个 ```json 剧情数据块；自然语言由创作 AI 转换，不在运行时调用 AI",
+        "Markdown 需要一個 ```json 劇情資料塊；自然語言由創作 AI 轉換，不在執行期呼叫 AI",
       );
     json = match[1];
     lineOffset =
@@ -122,7 +122,7 @@ try {
   } else if (!["validate", "test"].includes(mode))
     throw Error("未知命令 " + mode);
   console.log(
-    `${file}: ${mode} 通过 (${work.apps.filter((a) => a.installed).length} Apps, ${Object.values(work.data).flat().length} records, ${work.nodes.length} events, ${story.tests.length} paths)`,
+    `${file}: ${mode} 通過 (${work.apps.filter((a) => a.installed).length} Apps, ${Object.values(work.data).flat().length} records, ${work.nodes.length} events, ${story.tests.length} paths)`,
   );
 } catch (e) {
   let map = new Map();

@@ -1,4 +1,4 @@
-/* Device runtime: safe areas, system layers and gestures are independent of Studio. */
+/* iOS 18 手機外觀與系統介面 */
 .phone-shell.ios18 {
   border-radius: calc(48px * var(--phone-scale) + 7px);
   padding: 7px;
@@ -1121,6 +1121,7 @@
 .ios18 .notice-copy > span {
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
   font-size: 15px;

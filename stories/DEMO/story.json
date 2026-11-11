@@ -1,0 +1,507 @@
+{
+  "scriptVersion": 1,
+  "id": "foundphone-demo",
+  "title": "山下瞳月的IPHONE",
+  "description": "僅用於介面測試，不含劇情",
+  "revision": 4,
+  "phone": {
+    "owner": "山下瞳月",
+    "date": "2026-10-25",
+    "time": "09:41",
+    "battery": 94,
+    "network": "5G",
+    "wallpaper": "custom"
+  },
+  "installedApps": [
+    "appstore",
+    "phone",
+    "messages",
+    "contacts",
+    "photos",
+    {
+      "id": "camera",
+      "name": "相機",
+      "installed": true,
+      "visible": true,
+      "dock": true,
+      "folder": "",
+      "icon": ""
+    },
+    "safari",
+    "notes",
+    "calendar",
+    "mail",
+    "clock",
+    "reminders",
+    "files",
+    "music",
+    "maps",
+    "weather",
+    "wallet",
+    "health",
+    "find",
+    "calculator",
+    "settings",
+    "forum",
+    "instagram",
+    "tiktok",
+    "twitter",
+    "telegram",
+    "discord",
+    "youtube",
+    "line",
+    "facebook",
+    "messenger",
+    "spotify",
+    "netflix",
+    "threads"
+  ],
+  "contacts": [
+    {
+      "id": "test-contact",
+      "name": "對方",
+      "phone": "",
+      "avatar": "/sea.jpg",
+      "bio": "這是一條測試內容。"
+    }
+  ],
+  "chats": [
+    {
+      "id": "test-chat-messages",
+      "app": "messages",
+      "title": "測試對話",
+      "participants": [
+        "owner",
+        "test-contact"
+      ],
+      "messages": [
+        {
+          "id": "test-message-messages",
+          "body": "這是一條測試訊息。",
+          "senderId": "test-contact"
+        }
+      ]
+    },
+    {
+      "id": "test-chat-telegram",
+      "app": "telegram",
+      "title": "測試對話",
+      "participants": [
+        "owner",
+        "test-contact"
+      ],
+      "messages": [
+        {
+          "id": "test-message-telegram",
+          "body": "這是一條測試訊息。",
+          "senderId": "test-contact"
+        }
+      ]
+    },
+    {
+      "id": "test-chat-discord",
+      "app": "discord",
+      "title": "測試對話",
+      "participants": [
+        "owner",
+        "test-contact"
+      ],
+      "messages": [
+        {
+          "id": "test-message-discord",
+          "body": "這是一條測試訊息。",
+          "senderId": "test-contact"
+        }
+      ]
+    },
+    {
+      "id": "test-chat-messenger",
+      "app": "messenger",
+      "title": "測試對話",
+      "participants": [
+        "owner",
+        "test-contact"
+      ],
+      "messages": [
+        {
+          "id": "test-message-messenger",
+          "body": "這是一條測試訊息。",
+          "senderId": "test-contact"
+        }
+      ]
+    }
+  ],
+  "content": {
+    "line": [
+      {
+        "id": "msg-1",
+        "title": "測試對話",
+        "sender": "對方",
+        "body": "對方已收回訊息",
+        "kind": "system",
+        "time": "2026-06-07 09:50"
+      },
+      {
+        "id": "msg-2",
+        "title": "測試對話",
+        "sender": "對方",
+        "avatar": "/sea.jpg",
+        "body": "嗨，在嗎？",
+        "kind": "text",
+        "time": "2026-06-07 10:00"
+      },
+      {
+        "id": "msg-3",
+        "title": "測試對話",
+        "sender": "村井優",
+        "body": "在，怎麼了？",
+        "kind": "text",
+        "outgoing": true,
+        "read": true,
+        "time": "2026-06-07 10:01"
+      }
+    ],
+    "phone": [
+      {
+        "id": "test-item-phone",
+        "title": "測試內容",
+        "body": "這是一條測試內容。",
+        "sender": "測試使用者",
+        "kind": "text",
+        "meta": {}
+      }
+    ],
+    "contacts": [
+      {
+        "id": "test-item-contacts",
+        "title": "測試內容",
+        "body": "這是一條測試內容。",
+        "sender": "測試使用者",
+        "kind": "text",
+        "meta": {}
+      }
+    ],
+    "photos": [
+      {
+        "id": "test-item-photos",
+        "title": "測試內容",
+        "body": "這是一條測試內容。",
+        "sender": "測試使用者",
+        "kind": "text",
+        "meta": {}
+      }
+    ],
+    "camera": [
+      {
+        "id": "test-item-camera",
+        "title": "測試內容",
+        "body": "這是一條測試內容。",
+        "sender": "測試使用者",
+        "kind": "text",
+        "meta": {}
+      }
+    ],
+    "safari": [
+      {
+        "id": "test-item-safari",
+        "title": "測試內容",
+        "body": "這是一條測試內容。",
+        "sender": "測試使用者",
+        "kind": "text",
+        "meta": {}
+      }
+    ],
+    "notes": [
+      {
+        "id": "test-item-notes",
+        "title": "測試內容",
+        "body": "這是一條測試內容。",
+        "sender": "測試使用者",
+        "kind": "text",
+        "meta": {}
+      }
+    ],
+    "calendar": [
+      {
+        "id": "test-item-calendar",
+        "title": "測試內容",
+        "body": "這是一條測試內容。",
+        "sender": "測試使用者",
+        "kind": "text",
+        "meta": {}
+      }
+    ],
+    "mail": [
+      {
+        "id": "test-item-mail",
+        "title": "測試內容",
+        "body": "這是一條測試內容。",
+        "sender": "測試使用者",
+        "kind": "text",
+        "meta": {}
+      }
+    ],
+    "clock": [
+      {
+        "id": "test-item-clock",
+        "title": "測試內容",
+        "body": "這是一條測試內容。",
+        "sender": "測試使用者",
+        "kind": "text",
+        "meta": {}
+      }
+    ],
+    "reminders": [
+      {
+        "id": "test-item-reminders",
+        "title": "測試內容",
+        "body": "這是一條測試內容。",
+        "sender": "測試使用者",
+        "kind": "text",
+        "meta": {}
+      }
+    ],
+    "files": [
+      {
+        "id": "test-item-files",
+        "title": "測試內容",
+        "body": "這是一條測試內容。",
+        "sender": "測試使用者",
+        "kind": "text",
+        "meta": {}
+      }
+    ],
+    "music": [
+      {
+        "id": "test-item-music-2",
+        "title": "この空がトリガー",
+        "body": "=LOVE",
+        "sender": "=LOVE",
+        "avatar": "/CDこの空がトリガー.jpg",
+        "kind": "audio",
+        "media": "/DEMO_LOVE (この空がトリガー).mp3",
+        "meta": {}
+      }
+    ],
+    "maps": [
+      {
+        "id": "test-item-maps",
+        "title": "測試內容",
+        "body": "這是一條測試內容。",
+        "sender": "測試使用者",
+        "kind": "text",
+        "meta": {}
+      }
+    ],
+    "weather": [
+      {
+        "id": "test-item-weather",
+        "title": "測試內容",
+        "body": "這是一條測試內容。",
+        "sender": "測試使用者",
+        "kind": "text",
+        "meta": {}
+      }
+    ],
+    "wallet": [
+      {
+        "id": "test-item-wallet",
+        "title": "測試內容",
+        "body": "這是一條測試內容。",
+        "sender": "測試使用者",
+        "kind": "text",
+        "meta": {}
+      }
+    ],
+    "health": [
+      {
+        "id": "test-item-health",
+        "title": "測試內容",
+        "body": "這是一條測試內容。",
+        "sender": "測試使用者",
+        "kind": "text",
+        "meta": {}
+      }
+    ],
+    "find": [
+      {
+        "id": "test-item-find",
+        "title": "測試內容",
+        "body": "這是一條測試內容。",
+        "sender": "測試使用者",
+        "kind": "text",
+        "meta": {}
+      }
+    ],
+    "calculator": [
+      {
+        "id": "test-item-calculator",
+        "title": "測試內容",
+        "body": "這是一條測試內容。",
+        "sender": "測試使用者",
+        "kind": "text",
+        "meta": {}
+      }
+    ],
+    "settings": [
+      {
+        "id": "test-item-settings",
+        "title": "測試內容",
+        "body": "這是一條測試內容。",
+        "sender": "測試使用者",
+        "kind": "text",
+        "meta": {}
+      }
+    ],
+    "forum": [
+      {
+        "id": "test-item-forum",
+        "title": "測試內容",
+        "body": "這是一條測試內容。",
+        "sender": "測試使用者",
+        "kind": "text",
+        "meta": {}
+      }
+    ],
+    "instagram": [
+      {
+        "id": "test-item-instagram",
+        "title": "測試內容",
+        "body": "這是一條測試內容。",
+        "sender": "測試使用者",
+        "kind": "text",
+        "meta": {}
+      }
+    ],
+    "tiktok": [
+      {
+        "id": "test-item-tiktok",
+        "title": "測試內容",
+        "body": "這是一條測試內容。",
+        "sender": "測試使用者",
+        "kind": "text",
+        "meta": {}
+      }
+    ],
+    "twitter": [
+      {
+        "id": "test-item-twitter",
+        "title": "測試內容",
+        "body": "這是一條測試內容。",
+        "sender": "測試使用者",
+        "kind": "text",
+        "meta": {}
+      }
+    ],
+    "youtube": [
+      {
+        "id": "test-item-youtube",
+        "title": "測試內容",
+        "body": "這是一條測試內容。",
+        "sender": "測試使用者",
+        "kind": "text",
+        "meta": {}
+      }
+    ],
+    "facebook": [
+      {
+        "id": "test-item-facebook",
+        "title": "測試內容",
+        "body": "這是一條測試內容。",
+        "sender": "測試使用者",
+        "kind": "text",
+        "meta": {}
+      }
+    ],
+    "spotify": [
+      {
+        "id": "spotify-2",
+        "title": "この空がトリガー",
+        "avatar": "/CD_1.jpg",
+        "body": "=LOVE",
+        "sender": "=LOVE",
+        "kind": "audio",
+        "media": "/DEMO_LOVE (この空がトリガー).mp3",
+        "meta": {}
+      }
+    ],
+    "netflix": [
+      {
+        "id": "test-item-netflix",
+        "title": "測試內容",
+        "body": "這是一條測試內容。",
+        "sender": "測試使用者",
+        "kind": "text",
+        "meta": {}
+      }
+    ],
+    "threads": [
+      {
+        "id": "test-item-threads",
+        "title": "測試內容",
+        "body": "這是一條測試內容。",
+        "sender": "測試使用者",
+        "kind": "text",
+        "meta": {}
+      },
+      {
+        "id": "test-threads-message-1",
+        "title": "測試對話1",
+        "body": "這是一條測試訊息。",
+        "sender": "測試聯絡人1",
+        "folder": "私訊"
+      },
+      {
+        "id": "test-threads-activity-1",
+        "title": "測試動態1",
+        "body": "這是一條測試回覆動態。",
+        "sender": "測試使用者1",
+        "meta": {
+          "activityType": "reply"
+        }
+      },
+      {
+        "id": "test-threads-message-2",
+        "title": "測試對話2",
+        "body": "這是一條測試訊息。",
+        "sender": "測試聯絡人2",
+        "folder": "私訊"
+      },
+      {
+        "id": "test-threads-activity-2",
+        "title": "測試動態2",
+        "body": "這是一條測試回覆動態。",
+        "sender": "測試使用者2",
+        "meta": {
+          "activityType": "reply"
+        }
+      },
+      {
+        "id": "test-threads-message-3",
+        "title": "測試對話3",
+        "body": "這是一條測試訊息。",
+        "sender": "測試聯絡人3",
+        "folder": "私訊"
+      },
+      {
+        "id": "test-threads-activity-3",
+        "title": "測試動態3",
+        "body": "這是一條測試回覆動態。",
+        "sender": "測試使用者3",
+        "meta": {
+          "activityType": "reply"
+        }
+      }
+    ],
+    "appstore": [
+      {
+        "id": "test-appstore",
+        "title": "測試內容",
+        "body": "這是一條測試內容。"
+      }
+    ]
+  },
+  "variables": {},
+  "events": [],
+  "tests": []
+}
