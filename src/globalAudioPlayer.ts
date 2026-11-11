@@ -36,7 +36,8 @@ function savePos(reset = false) {
       posKey(state.item.id),
       String(reset ? 0 : audio.currentTime),
     );
-  } catch {}
+  } catch {
+     }
 }
 function readPos(id: string) {
   try {
