@@ -1,77 +1,88 @@
-/* iOS 18 classic reference coordinate space: 390 × 844 CSS points. */
+/* iOS 18 經典參考座標系：390 × 844 CSS 點（iPhone 14/15 邏輯尺寸） */
 .phone-shell.ios18 {
-  --phone-scale: 0.84;
-  width: calc(390px * var(--phone-scale) + 16px);
-  height: calc(844px * var(--phone-scale) + 16px);
-  padding: 8px;
-  border-radius: 48px;
+  --phone-scale: 0.84;                       /* 整體縮放比例，預設 0.84 */
+  width: calc(390px * var(--phone-scale) + 16px);   /* 螢幕寬 × 縮放 + 左右各 8px 邊框 */
+  height: calc(844px * var(--phone-scale) + 16px);  /* 螢幕高 × 縮放 + 上下各 8px 邊框 */
+  padding: 8px;                              /* 模擬手機邊框厚度 */
+  border-radius: 48px;                       /* 外殼大圓角*/
   background: linear-gradient(
     105deg,
-    #bfc0c2,
-    #242526 5%,
-    #111 12%,
-    #303133 90%,
-    #a3a4a6
+    #bfc0c2,                                 
+    #242526 5%,                              
+    #111 12%,                                
+    #303133 90%,                             
+    #a3a4a6                                  
   );
   box-shadow:
-    0 0 0 1px #6b6d70,
-    0 0 0 2px #c0c1c3,
-    0 22px 46px #0002;
+    0 0 0 1px #6b6d70,                       /* 金屬邊界 */
+    0 0 0 2px #c0c1c3,                       /*外圈高光 */
+    0 22px 46px #0002;                       /* 手機浮起陰影 */
 }
+
+/* 螢幕本體：固定 390×844，再用 zoom 縮放到外殼大小 */
 .ios18 .phone-screen {
   width: 390px;
   height: 844px;
-  zoom: var(--phone-scale);
+  zoom: var(--phone-scale);                  
   border: 0;
-  border-radius: 47px;
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI",
-    "Microsoft YaHei", sans-serif;
-  -webkit-font-smoothing: antialiased;
+  border-radius: 47px;                       
+  /* iOS 系統字體堆疊：優先用 Apple 系統字，再退回繁中字體 */
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", "Heiti TC", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;       /* 邊緣平滑，接近 iOS 渲染 */
 }
+
+/* 狀態列 */
 .ios18 .status-bar {
   height: 59px;
-  padding: 0 28px 0 34px;
+  padding: 0 28px 0 34px;                    
   background: transparent;
-  align-items: center;
+  align-items: center;                       
 }
 .ios18 .status-bar > button {
   font-size: 16px;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.5px;                    
   font-weight: 600;
 }
+
+/* 動態島：黑色膠囊 */
 .ios18 .dynamic-island {
-  top: 11px;
+  top: 11px;                                 /* 距頂 11px */
   width: 126px;
   height: 37px;
-  border-radius: 23px;
-  background: #000;
+  border-radius: 23px;                       /* 圓角 */
+  background: #000;                          
   box-shadow: none;
 }
 .ios18 .dynamic-island:after {
-  top: 13px;
+  content: "";
+  top: 13px;                                 /* 右側鏡頭點 */
   right: 12px;
   width: 10px;
   height: 10px;
 }
+
+/* 訊號圖示群組 */
 .ios18 .signals {
-  gap: 6px;
+  gap: 6px;                                  /* 圖示間距 */
 }
 .ios18 .signals svg {
   width: 17px;
   height: 17px;
-  stroke-width: 2.4;
+  stroke-width: 2.4;                         /* 圖示線條加粗 */
 }
+
+/* 電池 */
 .ios18 .ios-battery {
   position: relative;
   width: 26px;
   height: 13px;
   border-radius: 4px;
-  border: 1px solid currentColor;
+  border: 1px solid currentColor;           
   font-size: 9px;
   line-height: 11px;
   display: block;
 }
+/* 電池右側正極凸點 */
 .ios18 .ios-battery:after {
   content: "";
   position: absolute;
@@ -83,14 +94,16 @@
   border-radius: 0 2px 2px 0;
   opacity: 0.6;
 }
+/* 電量填充條 */
 .ios18 .ios-battery > span {
   display: block;
   height: 100%;
-  max-width: 100%;
+  max-width: 100%;                           
   border-radius: 2px;
   background: currentColor;
   opacity: 0.9;
 }
+/* 電量百分比文字 */
 .ios18 .ios-battery > b {
   position: absolute;
   inset: 0;
