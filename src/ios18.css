@@ -1,4 +1,6 @@
-/* iOS 18 經典參考座標系：390 × 844 CSS 點（iPhone 14/15 邏輯尺寸） */
+/* ============================================================
+   手機外殼與螢幕
+   ============================================================ */
 .phone-shell.ios18 {
   --phone-scale: 0.84;                       /* 整體縮放比例，預設 0.84 */
   width: calc(390px * var(--phone-scale) + 16px);   /* 螢幕寬 × 縮放 + 左右各 8px 邊框 */
@@ -31,6 +33,10 @@
   -webkit-font-smoothing: antialiased;       /* 邊緣平滑，接近 iOS 渲染 */
 }
 
+/* ============================================================
+   狀態列、動態島、訊號與電池
+   ============================================================ */
+
 /* 狀態列 */
 .ios18 .status-bar {
   height: 59px;
@@ -46,16 +52,16 @@
 
 /* 動態島：黑色膠囊 */
 .ios18 .dynamic-island {
-  top: 11px;                                 /* 距頂 11px */
+  top: 11px;                                 
   width: 126px;
   height: 37px;
-  border-radius: 23px;                       /* 圓角 */
+  border-radius: 23px;                       
   background: #000;                          
   box-shadow: none;
 }
 .ios18 .dynamic-island:after {
   content: "";
-  top: 13px;                                 /* 右側鏡頭點 */
+  top: 13px;                                 
   right: 12px;
   width: 10px;
   height: 10px;
@@ -63,12 +69,11 @@
 
 /* 訊號圖示群組 */
 .ios18 .signals {
-  gap: 6px;                                  /* 圖示間距 */
-}
+  gap: 6px;                                  
 .ios18 .signals svg {
   width: 17px;
   height: 17px;
-  stroke-width: 2.4;                         /* 圖示線條加粗 */
+  stroke-width: 2.4;                         
 }
 
 /* 電池 */
@@ -113,101 +118,121 @@
   color: #333;
   mix-blend-mode: screen;
 }
+/* ============================================================
+   主畫面
+   ============================================================ */
+/* 主畫面：上下留白避開狀態列與底部 Dock */
 .ios18 .home-screen {
   padding: 76px 0 31px;
   gap: 0;
 }
+
+/* 多頁主畫面容器：水平滑動 + 整頁吸附 */
 .ios18 .home-pages {
   display: flex;
-  overflow-x: auto;
+  overflow-x: auto;                          
   overflow-y: hidden;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
+  scroll-snap-type: x mandatory;             
+  scrollbar-width: none;                     
   min-height: 0;
   flex: 1;
-  overscroll-behavior-x: contain;
-  touch-action: pan-x;
+  overscroll-behavior-x: contain;            
+  touch-action: pan-x;                       
 }
 .ios18 .home-pages::-webkit-scrollbar {
-  display: none;
+  display: none;                             
 }
+
+/* 每頁 App 格：4 欄 × 6 列，每格高 88px */
 .ios18 .home-app-grid {
-  flex: 0 0 100%;
+  flex: 0 0 100%;                            
   width: 100%;
   max-height: none;
   margin: 0;
-  padding: 0 23px;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  grid-template-rows: repeat(6, 88px);
+  padding: 0 23px;                           
+  grid-template-columns: repeat(4, minmax(0, 1fr));  
+  grid-template-rows: repeat(6, 88px);       
   grid-auto-rows: 88px;
   row-gap: 0;
   column-gap: 0;
   overflow: hidden;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+  scroll-snap-align: start;                 
+  scroll-snap-stop: always;                  
   align-content: start;
 }
 .ios18 .home-app-grid > button {
   display: flex;
-  justify-content: center;
-  align-items: flex-start;
+  justify-content: center;                   
+  align-items: flex-start;                   
 }
+
+/* 圖示 + 名稱的包裝 */
 .ios18 .app-icon-wrap {
-  gap: 6px;
+  gap: 6px;                                  
 }
+
+/* App 圖示本體：60×60、圓角 15px */
 .ios18 .app-icon {
   width: 60px;
   height: 60px;
   border-radius: 15px;
   position: relative;
-  isolation: isolate;
+  isolation: isolate;                        
   box-shadow:
-    inset 0 1px 1px #fffc,
-    inset 0 -1px 1px #0003,
-    0 2px 6px #0002;
+    inset 0 1px 1px #fffc,                  
+    inset 0 -1px 1px #0003,                  
+    0 2px 6px #0002;                         
 }
+/* 圖示高光覆蓋層（後續 classic 段被 display:none 關閉） 
 .ios18 .app-icon:after {
   content: "";
-  pointer-events: none;
+  pointer-events: none;                      
   position: absolute;
   inset: 0;
   border-radius: inherit;
   box-shadow:
-    inset 0 0 0 0.7px #ffffff5c,
-    inset 0 1px 2px #fff8,
-    inset 0 -1px 2px #0002;
+    inset 0 0 0 0.7px #ffffff5c,             
+    inset 0 1px 2px #fff8,                   
+    inset 0 -1px 2px #0002;                  
   background: linear-gradient(
     145deg,
-    #fff2,
+    #fff2,                                   
     transparent 38%,
     transparent 70%,
-    #fff1
+    #fff1                                   
   );
 }
+
+/* App 圖檔（SVG/圖片）填滿圖示 */
 .ios18 .app-artwork {
   width: 100%;
   height: 100%;
   display: block;
 }
+
+/* App 名稱文字 */
 .ios18 .app-name {
-  font-size: 12px;
+  font-size: 20px;
   font-weight: 500;
   max-width: 80px;
-  line-height: 16px;
-  text-shadow: 0 1px 4px #0008;
+  line-height: 16px;    
+  text-shadow: 0 1px 4px #0008;              
 }
+
+/* 資料夾圖示 */
 .ios18 .folder-icon {
   width: 60px;
   height: 60px;
   border-radius: 16px;
-  backdrop-filter: blur(18px) saturate(1.5);
-  background: #ffffff30;
+  backdrop-filter: blur(18px) saturate(1.5); 
+  background: #ffffff30;                     
   border: 1px solid #fff5;
   padding: 6px;
 }
 .ios18 .folder-icon .app-icon-wrap {
   gap: 0;
 }
+/* 資料夾內迷你圖示 */
 .ios18 .folder-icon .app-icon-wrap.small .app-icon {
   width: 13px;
   height: 13px;
@@ -218,6 +243,8 @@
   height: 34px;
   border-radius: 9px;
 }
+
+/* 主畫面底部「搜尋」膠囊 */
 .ios18 .home-search {
   flex: none;
   min-height: 28px;
@@ -225,12 +252,14 @@
   margin: 4px auto 15px;
   font-size: 12px;
   border-radius: 20px;
-  background: #ffffff26;
-  backdrop-filter: blur(16px);
+  background: #ffffff26;                     
+  backdrop-filter: blur(16px);               
   box-shadow:
     inset 0 1px 1px #fff5,
     0 1px 4px #0001;
 }
+
+/* 分頁小圓點 */
 .ios18 .home-page-dots {
   display: flex;
   align-items: center;
@@ -244,12 +273,14 @@
   height: 6px;
   min-width: 6px;
   padding: 0;
-  background: #ffffff60;
+  background: #ffffff60;                     
   border-radius: 50%;
 }
 .ios18 .home-page-dots button[aria-current] {
-  background: #fff;
+  background: #fff;                          
 }
+
+/* Dock */
 .ios18 .dock {
   height: 94px;
   min-height: 94px;
@@ -258,25 +289,28 @@
   border-radius: 35px;
   gap: 18px;
   flex: none;
-  background: #ffffff29;
-  backdrop-filter: blur(28px) saturate(1.7);
+  background: #ffffff29;                     
+  backdrop-filter: blur(28px) saturate(1.7); 
   border: 1px solid #fff5;
   box-shadow:
-    inset 1px 1px 2px #fffa,
-    inset -1px -1px 2px #0001,
-    0 4px 14px #0001;
+    inset 1px 1px 2px #fffa,                 
+    inset -1px -1px 2px #0001,               
+    0 4px 14px #0001;                        
 }
 .ios18 .dock .app-icon {
   width: 60px;
   height: 60px;
   border-radius: 15px;
 }
+
+/* Home 指示條：底部白色橫條 */
 .ios18 .home-indicator {
   bottom: 8px;
   width: 135px;
   height: 5px;
   border-radius: 4px;
 }
+
 .ios18 .lock-screen {
   padding-top: 95px;
 }
@@ -965,4 +999,4 @@
   gap: 7px;
   font-size: 12px;
 }
-
+}
