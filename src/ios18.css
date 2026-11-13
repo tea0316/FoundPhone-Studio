@@ -69,7 +69,9 @@
 
 /* 訊號圖示群組 */
 .ios18 .signals {
-  gap: 6px;                                  
+  gap: 6px;  
+}
+
 .ios18 .signals svg {
   width: 17px;
   height: 17px;
@@ -183,7 +185,7 @@
     inset 0 -1px 1px #0003,                  
     0 2px 6px #0002;                         
 }
-/* 圖示高光覆蓋層（後續 classic 段被 display:none 關閉） 
+/* 圖示高光覆蓋層（後續 classic 段被 display:none 關閉） */
 .ios18 .app-icon:after {
   content: "";
   pointer-events: none;                      
@@ -212,10 +214,11 @@
 
 /* App 名稱文字 */
 .ios18 .app-name {
-  font-size: 20px;
+  font-size: 40px;
   font-weight: 500;
   max-width: 80px;
-  line-height: 16px;    
+  line-height: 16px;  
+  color: #fdfdfd;  
   text-shadow: 0 1px 4px #0008;              
 }
 
@@ -998,5 +1001,4 @@
   align-items: center;
   gap: 7px;
   font-size: 12px;
-}
 }
